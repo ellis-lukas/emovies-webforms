@@ -1,0 +1,343 @@
+* {
+    margin: 0;
+    padding: 0; 
+
+}
+
+body {
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    height: 39px;
+    line-height: 39px;
+    margin: 10vh 0 33px 10px;
+}
+
+h2 {
+    font-size: 24px;
+    height: 39px;
+    line-height: 39px;
+    margin-bottom: 9px;
+    padding-left: 7px;
+}
+
+button {
+    border: none;
+    color: #fff;
+    font-size: 1em;
+}
+
+.container {
+    font-family: calibri, sans-serif;  
+    margin: 0 auto;
+    position: relative;
+    width: 680px;  
+}
+
+.info {
+    background-image: linear-gradient(#ffead7,#ffbc84);
+    border: 1px solid #eeb484;
+    box-shadow: 0px 2px 2px #aaa;
+}
+
+.info--movie {
+    padding: 16px 8px 16px 22px;
+    width: 648px;
+}
+
+.info--order {
+    padding: 24px 14px 16px 16px;
+    width: 648px;
+}
+
+.info--confirmation {
+    padding: 15px 0px 25px 15px;
+    width: 663px;
+}
+
+.table {
+
+}
+
+.table-heading {
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.table-heading__cell {
+    float: left;
+    padding: 0 2px;
+}
+
+.table-heading__cell--movie {
+    width: 332px;
+}
+
+.table-heading__cell--quantity {
+    margin: 0 16px;
+    width: 172px;
+}
+
+.table-heading__cell--price {
+    width: 100px;
+}
+
+.table-row {
+    height: 32px;
+    margin-bottom: 16px;
+}
+
+.table-row__cell {
+    float: left;
+}
+
+.table-row__cell--movie {
+    width: 314px;
+    padding: 0 10px;
+}
+
+.table-row__cell--quantity {
+    margin: 0 16px;
+    padding-left: 10px;
+    width: 160px;
+    text-align: center;
+    font-size: 24px;
+    font-family: calibri, sans-serif;  
+}
+
+.table-row__cell--price {
+    width: 82px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.table-row__cell--blue {
+    background-color: none;
+    background-image: linear-gradient(#dbf9ff, #a4ecff);
+    border: 1px solid #72b6c5;
+    border-radius: 0px;
+    box-shadow: 0px 2px 2px #aaa;
+    height: 30px;
+    line-height: 30px;
+}
+
+.table-row__cell--white, .form-row__cell--white {
+    background-color: #fff;
+    background-image: none;
+    border: 3px solid #4bacc6;
+    border-radius: 2px;
+    height: 26px;
+    line-height: 26px;
+}
+
+.update {
+    height: 32px;
+    margin-top: 15px;
+    position: relative;
+}
+
+.update__button { 
+    background-image: linear-gradient(#9ac445,#7b9b39);
+    box-shadow: 0px 2px 2px #aaa;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    width: 184px;
+}
+
+.notice {
+    border: 1px solid #fbcaa2;
+    font-size: 22px;
+    height: 32px;
+    line-height: 32px;
+    margin: 16px 0;
+    text-align: center;
+}
+
+.order {
+    height: 40px;
+    position: relative;
+}
+
+.order--order-now {
+    margin-top: 14px;
+}
+
+.order--submit-order  {
+    margin-top: 24px;
+}
+
+.order__button {
+    background-image: linear-gradient(#ff8d26,#d17121);
+    box-shadow: 0px 2px 2px #aaa;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    width: 264px;
+    border: none;
+    color: #fff;
+    font-size: 1em;
+}
+
+.form {
+
+}
+
+.form-row {
+    height: 32px;
+}
+
+.form-row--upper {
+    margin-bottom: 16px;
+}
+
+.form-row--lower {
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.form-row__cell {
+    float: left;
+}
+
+.form-row__cell--label{
+    width: 222px;
+    padding-right: 10px;
+    line-height: 32px;
+    text-align: right;
+}
+
+.form-row__cell--input {
+    margin-left: 40px;
+    line-height: 26px;
+}
+
+.form-row__cell--text {
+    width: 360px;
+    padding: 0 5px;
+}
+
+.form-row__cell--select {
+    display: block;
+    height: 32px;
+    width: 192px;
+}
+
+.form-row__cell--container {
+    height: 18px;
+    width: 18px;
+}
+
+.form-row__cell--shifted {
+    bottom: 16px;
+    position: relative;
+}
+
+.form-row__checklabel {    
+    display: block;
+    height: 18px;
+    width: 18px;
+    float: left;
+}
+
+.form-row__checkbox {
+    height: 0; 
+    width: 0;
+}
+
+.form-row__checkbox:checked + .form-row__checklabel {
+    background-color: #00ff61;
+}
+
+.form-row__cell--output {
+    padding-left: 10px;
+    width: 366px;
+    height: 32px;
+    line-height: 32px;
+    text-align: left;
+    margin-left: 40px;
+}
+
+.summary {
+    margin-top: 33px;
+
+}
+
+.summary-row {
+    height: 39px;
+    margin-bottom: 1px;
+}
+
+.summary-row__cell {
+    float: left;
+    height: 39px;
+    line-height: 39px;
+    padding: 0 10px;
+}
+
+.summary-row__cell--movie {
+    text-align: left;
+    width: 380px;
+}
+
+.summary-row__cell--order {
+    text-align: right;
+    width: 172px;
+    margin-left: 24px;
+}
+
+.total {
+    height: 32px;
+    font-weight: bold;
+    position: relative;
+}
+
+.total--table {
+    margin-top: 17px;
+}
+
+.total--summary {
+    margin-top: 16px;
+    width: 616px;
+}
+
+.total__cell {
+    position: absolute;
+    padding: 0 10px;
+    line-height: 32px;
+}
+
+.total__cell--label {
+    text-align: right;
+    width: 156px;
+}
+
+.total__cell--label-table {
+    right: 120px;
+}
+
+.total__cell--label-summary {
+    right: 160px;
+}
+
+.total__cell--value {
+    width: 84px;
+    right: 0px;
+}
+
+.total__cell--value-table {
+    text-align: center;
+}
+
+.total__cell--value-summary {
+    text-align: right;
+}
+
+
+
+

@@ -1,0 +1,47 @@
+# Ignore file for Visual Studio
+# use glob syntax
+syntax: glob
+# Ignore Visual Studio files
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.log.*
+*.lib
+*.sbr
+*.scc
+*.dbmdl
+*.dbproj.schemaview
+*.docstates
+*.orig
+*.rej
+*.patch
+.vs/
+[Bb]in/
+[Dd]ebug/
+obj/
+[Rr]elease/
+[Pp]ackages/
+_ReSharper*/
+[Bb]uild[Ll]og.*
+*.[Pp]ublish.xml
+StyleCop.Cache
+*.feature.cs
+# Ignore test-specific and dev-specific stuff
+_[Tt]est/*
+_[Pp]ubs/*
+_[Tt]emp/*
+
