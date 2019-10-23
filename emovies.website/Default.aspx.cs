@@ -67,5 +67,14 @@ namespace emovies.website
 
             
         }
+
+        protected void SubmitButtonClicked(object sender, EventArgs e)
+        {
+            foreach (RepeaterItem item in Repeater1.Items)
+            {
+                TextBox sdefg = (TextBox)item.FindControl("quantity");
+            }
+
+        }
     }
 }
