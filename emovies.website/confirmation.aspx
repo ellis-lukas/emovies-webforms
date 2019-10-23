@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="confirmation.aspx.cs" Inherits="emovies.website.Confirmation" %>
+﻿<%@ Page Title="order confirmation" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="confirmation.aspx.cs" Inherits="emovies.website.Confirmation" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Order confirmation</h1>
@@ -43,4 +43,5 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="Scripts/pageScripts/confirmation.js"></script>
 </asp:Content>

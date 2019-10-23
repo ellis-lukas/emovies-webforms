@@ -6,13 +6,17 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Globalization;
+using System.Threading;
 
 namespace emovies.website
 {
-    public partial class _Default : Page
+    public partial class Default : Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+
             var movie1 = new Movie
             {
                 Name = "Movie 1",
@@ -59,6 +63,9 @@ namespace emovies.website
 
             Repeater1.DataSource = movieList;
             Repeater1.DataBind();
+
+
+            
         }
     }
 }

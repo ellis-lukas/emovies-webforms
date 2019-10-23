@@ -27,6 +27,16 @@ button {
     border: none;
     color: #fff;
     font-size: 1em;
+    outline: none;
+}
+
+button:active {
+    box-shadow: none;
+    transform: translateY(2px);
+}
+
+input, select {
+    outline: none;
 }
 
 .container {
@@ -146,6 +156,7 @@ button {
     position: absolute;
     right: 0;
     width: 184px;
+    top: 0px;
 }
 
 .notice {
@@ -240,16 +251,18 @@ button {
     height: 18px;
     width: 18px;
     float: left;
+    background-size: cover;
 }
+
 
 .form-row__checkbox {
-    height: 0;
-    width: 0;
+    display: none;
 }
 
-    .form-row__checkbox:checked + .form-row__checklabel {
-        background-color: #00ff61;
-    }
+
+.form-row__checkbox:checked {
+    
+}
 
 .form-row__cell--output {
     padding-left: 10px;

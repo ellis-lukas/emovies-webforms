@@ -108,8 +108,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="confirmation.aspx" />
     <Content Include="order.aspx" />
-    <Content Include="Default.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\pageScripts\default.js" />
+    <Content Include="Scripts\pageScripts\confirmation.js" />
+    <Content Include="Scripts\pageScripts\order.js" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -160,12 +163,12 @@
     <Compile Include="order.aspx.designer.cs">
       <DependentUpon>order.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images2\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
