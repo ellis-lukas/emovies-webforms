@@ -156,6 +156,7 @@
     <Compile Include="confirmation.aspx.designer.cs">
       <DependentUpon>confirmation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\MovieRepository.cs" />
     <Compile Include="order.aspx.cs">
       <DependentUpon>order.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
