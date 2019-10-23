@@ -35,7 +35,7 @@
     </div>
     <div class="notice">Tickets are only valid for use on the day of purchase</div>
     <div class="order order--order-now">
-        <asp:Button CssClass="order__button" type="submit" Text="Order now>>" runat="server" OnClick="SubmitButtonClicked" />
+        <asp:Button CssClass="order__button" Text="Order now >>" OnClick="SubmitButtonClicked" runat="server"/>
     </div>
     <script type="text/javascript" src="Scripts/pageScripts/default.js"></script>
 </asp:Content>
