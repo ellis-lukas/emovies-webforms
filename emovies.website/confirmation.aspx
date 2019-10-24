@@ -7,24 +7,24 @@
             <h2>Your details</h2>
             <div class="form-row form-row--upper">
                 <div class="form-row__cell form-row__cell--label">Name</div>
-                <div class="form-row__cell form-row__cell--output">John Smith</div>
+                <div class="form-row__cell form-row__cell--output"><%=VisitorInfo.Name%></div>
             </div>
             <div class="form-row form-row--upper">
                 <div class="form-row__cell form-row__cell--label">Email</div>
-                <div class="form-row__cell form-row__cell--output">john.smith@example.com</div>
+                <div class="form-row__cell form-row__cell--output"><%=VisitorInfo.Email%></div>
             </div>
             <div class="form-row form-row--upper">
                 <div class="form-row__cell form-row__cell--label">Credit card number</div>
-                <div class="form-row__cell form-row__cell--output">1234 **** **** ****</div>
+                <div class="form-row__cell form-row__cell--output"><%=VisitorInfo.CardNumber%></div>
             </div>
             <div class="form-row form-row--lower">
                 <div class="form-row__cell form-row__cell--label">Credit card type</div>
-                <div class="form-row__cell form-row__cell--output">Visa</div>
+                <div class="form-row__cell form-row__cell--output"><%=VisitorInfo.CardType%></div>
             </div>
             <div class="form-row form-row--lower">
                 <div class="form-row__cell form-row__cell--label form-row__cell--shifted">Please email me<br>
                     future promotions</div>
-                <div class="form-row__cell form-row__cell--output">Yes</div>
+                <div class="form-row__cell form-row__cell--output"><%=VisitorInfo.FuturePromotions%></div>
             </div>
         </div>
         <div class="summary">
