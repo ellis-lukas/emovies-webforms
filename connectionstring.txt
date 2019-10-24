@@ -1,0 +1,1 @@
+"Server=xena\sql2017;Database=emovies.Lukas;User Id=emovies.Lukas;Password=emovies;"

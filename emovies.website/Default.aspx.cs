@@ -14,67 +14,66 @@ namespace emovies.website
     {
         private List<Movie> MovieList = new List<Movie>()
         { 
-            new Movie {Name="Movie 1", Price=4.99m},
-            new Movie {Name="Movie 2", Price=4.99m},
-            new Movie {Name="Movie 3", Price=5.99m},
-            new Movie {Name="Movie 4", Price=6.99m},
-            new Movie {Name="Movie 5", Price=7.99m},
-            new Movie {Name="Movie 6", Price=4.49m},
+            new Movie {Id=1, Name="Movie 1", Price=4.99m},
+            new Movie {Id=2, Name="Movie 2", Price=4.99m},
+            new Movie {Id=3, Name="Movie 3", Price=5.99m},
+            new Movie {Id=4, Name="Movie 4", Price=6.99m},
+            new Movie {Id=5, Name="Movie 5", Price=7.99m},
+            new Movie {Id=6, Name="Movie 6", Price=4.49m}
         };
 
-        private Movie movie1 = new Movie
-        {
-            Name = "Movie 1",
-            Price = 4.99m
-        };
+        private List<OrderMade> OrderMadeList = new List<OrderMade>() {};
 
-        private Movie movie2 = new Movie
+        private int GetQuantityFromItem(RepeaterItem item)
         {
-            Name = "Movie 2",
-            Price = 4.99m
-        };
+            TextBox quantityBox = (TextBox)item.FindControl("quantity");
+            int quantity = int.Parse(quantityBox.Text);
+            return quantity;
+        }
 
-        private Movie movie3 = new Movie
-        {
-            Name = "Movie 3",
-            Price = 5.99m
-        };
+        private decimal Total = 0;
 
-        private Movie movie4 = new Movie
+        private void WriteOrderList()
         {
-            Name = "Movie 4",
-            Price = 5.99m
-        };
+            int counter = 0;
 
-        private Movie movie5 = new Movie
-        {
-            Name = "Movie 5",
-            Price = 6.00m
-        };
+            foreach (RepeaterItem item in Repeater1.Items)
+            {
+                int _quantity = GetQuantityFromItem(item);
+                if (_quantity != 0)
+                {
+                    int _Id = OrderMadeList.Count + 1;
+                    int _MovieId = MovieList[counter].Id;
+                    OrderMadeList.Add(new OrderMade { Id = _Id, MovieId = _MovieId, Quantity = _quantity });
+                }
+                counter++;
+            }
+        }
 
-        private Movie movie6 = new Movie
+        private void CalculateTotal()
         {
-            Name = "Movie 6",
-            Price = 12.00m
-        };
+            foreach (OrderMade order in OrderMadeList)
+            {
+                Total += order.Quantity * MovieList[order.MovieId-1].Price;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
-
-            List<Movie> movieList = new List<Movie>();
-            movieList.Add(movie1);
-            movieList.Add(movie2);
-            movieList.Add(movie3);
-            movieList.Add(movie4);
-            movieList.Add(movie5);
-            movieList.Add(movie6);
-            Repeater1.DataSource = movieList;
-            Repeater1.DataBind();
+            if (!Page.IsPostBack)
+            {
+                Repeater1.DataSource = MovieList;
+                Repeater1.DataBind();
+            }
         }
 
-        protected void SubmitButtonClicked(object sender, EventArgs e)
+        protected void OrderNowClicked(object sender, EventArgs e)
         {
+            WriteOrderList();
+            CalculateTotal();
+            Session["Total"] = Total;
+            Session["OrderMade"] = OrderMadeList;
             Response.Redirect("order.aspx");
         }
     }

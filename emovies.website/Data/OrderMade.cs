@@ -5,12 +5,12 @@ using System.Web;
 
 namespace emovies.website.Data
 {
-    public class Movie
+    public class OrderMade
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public int MovieId { get; set; }
 
-        public decimal Price { get; set; }
+        public int Quantity { get; set; }
     }
 }
