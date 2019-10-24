@@ -12,39 +12,32 @@ namespace emovies.website
 {
     public partial class Default : Page
     {
-        private List<Movie> MovieList = new List<Movie>()
-        { 
-            new Movie {Id=1, Name="Movie 1", Price=4.99m},
-            new Movie {Id=2, Name="Movie 2", Price=4.99m},
-            new Movie {Id=3, Name="Movie 3", Price=5.99m},
-            new Movie {Id=4, Name="Movie 4", Price=6.99m},
-            new Movie {Id=5, Name="Movie 5", Price=7.99m},
-            new Movie {Id=6, Name="Movie 6", Price=4.49m}
-        };
+        public readonly MovieRepository MovieRepo = new MovieRepository();
+        public readonly List<Movie> MovieList;
 
-        private List<OrderMade> OrderMadeList = new List<OrderMade>() {};
+        private readonly List<OrderMade> OrderMadeList = new List<OrderMade>() {};
 
-        private int GetQuantityFromItem(RepeaterItem item)
+        private int GetQuantityFromRepeatedRow(RepeaterItem row)
         {
-            TextBox quantityBox = (TextBox)item.FindControl("quantity");
-            int quantity = int.Parse(quantityBox.Text);
+            TextBox quantityTextBox = (TextBox)(row.FindControl("quantity"));
+            int quantity = int.Parse(quantityTextBox.Text);
             return quantity;
         }
 
         private decimal Total = 0;
 
-        private void WriteOrderList()
+        private void FillInOrderListFromMovieTable(RepeaterItemCollection repeaterItems, List<OrderMade> orderList)
         {
             int counter = 0;
 
-            foreach (RepeaterItem item in Repeater1.Items)
+            foreach (RepeaterItem item in repeaterItems)
             {
-                int _quantity = GetQuantityFromItem(item);
+                int _quantity = GetQuantityFromRepeatedRow(item);
                 if (_quantity != 0)
                 {
-                    int _Id = OrderMadeList.Count + 1;
+                    int _Id = orderList.Count + 1;
                     int _MovieId = MovieList[counter].Id;
-                    OrderMadeList.Add(new OrderMade { Id = _Id, MovieId = _MovieId, Quantity = _quantity });
+                    orderList.Add(new OrderMade { Id = _Id, MovieId = _MovieId, Quantity = _quantity });
                 }
                 counter++;
             }
@@ -68,9 +61,14 @@ namespace emovies.website
             }
         }
 
+        protected void Page_PreInit(object sender, EventArgs e)
+        {
+            MovieList = MovieRepo.GetMovies();
+        }
+
         protected void OrderNowClicked(object sender, EventArgs e)
         {
-            WriteOrderList();
+            FillInOrderListFromMovieTable(Repeater1.Items);
             CalculateTotal();
             Session["Total"] = Total;
             Session["OrderMade"] = OrderMadeList;
