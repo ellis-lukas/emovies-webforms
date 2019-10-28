@@ -6,19 +6,19 @@
         <div class="form">
             <div class="form-row form-row--upper">
                 <label for="name" class="form-row__cell form-row__cell--label">Name</label>
-                <asp:TextBox ID="name" CssClass="form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
+                <asp:TextBox ID="name" CssClass="form-row__name form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
             </div>
             <div class="form-row form-row--upper">
                 <label for="email" class="form-row__cell form-row__cell--label">Email</label>
-                <asp:TextBox ID="email" CssClass="form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
+                <asp:TextBox ID="email" CssClass="form-row__email form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
             </div>
             <div class="form-row form-row--upper">
                 <label for="cardNumber" class="form-row__cell form-row__cell--label">Credit card number</label>
-                <asp:TextBox ID="cardNumber" CssClass="form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
+                <asp:TextBox ID="cardNumber" CssClass="form-row__card-number form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
             </div>
             <div class="form-row form-row--lower">
                 <label for="cardType" class="form-row__cell form-row__cell--label">Credit card type</label>
-                <asp:DropDownList ID="cardType" CssClass="form-row__cell form-row__cell--input form-row__cell--select form-row__cell--white" runat="server">
+                <asp:DropDownList ID="cardType" CssClass="form-row__card-type form-row__cell form-row__cell--input form-row__cell--select form-row__cell--white" runat="server">
                     <asp:ListItem>A</asp:ListItem>
                     <asp:ListItem>B</asp:ListItem>
                 </asp:DropDownList>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="order order--submit-order">
-        <asp:Button CssClass="order__button" Text="Submit order >>" type="submit" runat="server" OnClick="SubmitOrderClicked" />
+        <asp:Button CssClass="order__button" Text="Submit order >>" type="submit" OnClick="SubmitOrderClicked" runat="server"/>
     </div>
     <script type="text/javascript" src="Scripts/pageScripts/order.js"></script>
 </asp:Content>

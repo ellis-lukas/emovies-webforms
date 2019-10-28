@@ -17,8 +17,8 @@
                         <div class="table-row__cell table-row__cell--movie table-row__cell--blue"><%# Eval("Name") %></div>
                         <!--
                             <input class="table-row__cell table-row__cell--quantity table-row__cell--white" type="number" value="0" name="quantity" min="0" max="254">
-                            -->
-                        <asp:TextBox ID="quantity" CssClass="table-row__cell table-row__cell--quantity table-row__cell--white" type="number" value="0" min="0" max="254" runat="server"></asp:TextBox>
+                        -->
+                        <asp:TextBox ID="quantity" Cssclass="table-row__cell table-row__cell--quantity table-row__cell--white" type="number" value="0" min="0" max="254" runat="server"></asp:TextBox>
                         <div class="table-row__cell table-row__cell--price table-row__cell--blue"><%# Eval("Price", "{0:c}") %></div>
                         <input type="hidden" class="table-row__price-bucket" value="<%# Eval("Price") %>" />
                     </div>

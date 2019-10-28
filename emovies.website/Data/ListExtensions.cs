@@ -6,11 +6,19 @@ using System.Web.UI.WebControls;
 
 namespace emovies.website.Data
 {
-    //keep this as a class for now. Eventually, when loading in from a database, it might be worth changin gthis file to a group of interfaces and classes
+    //keep this as a class for now. Eventually, when loading in from a database, it might be worth changing this file to a group of interfaces and classes
     public static class ListExtensions
     {
-        public static L OutputAll(this IEnumerable<OrderMade> orders, RepeaterItemCollection repeaterItemCollection, List<Movie> movieList)
+        private static int GetQuantityFromRepeatedRow(RepeaterItem row)
         {
+            TextBox quantityTextBox = (TextBox)(row.FindControl("quantity"));
+            int quantity = int.Parse(quantityTextBox.Text);
+            return quantity;
+        }
+
+        public static List<OrderMade> PopulateOrderListFromMovieTable (this List<OrderMade> orderList, RepeaterItemCollection repeaterItemCollection, List<Movie> movieList)
+        {
+            List<OrderMade> orders = new List<OrderMade>();
             int counter = 0;
 
             foreach (RepeaterItem item in repeaterItemCollection)
@@ -26,6 +34,18 @@ namespace emovies.website.Data
             }
 
             return orders;
+        }
+
+        public static decimal Total (this List<OrderMade> orderList, List<Movie> movieList)
+        {
+            decimal Total = 0.0m;
+
+            foreach (OrderMade order in orderList)
+            {
+                Total += order.Quantity * movieList[order.MovieId - 1].Price;
+            }
+
+            return Total;
         }
     }
 }

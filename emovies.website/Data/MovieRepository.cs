@@ -26,7 +26,6 @@ namespace emovies.website.Data
         }
     }
 
-
     public class MovieDatabaseRepository : IMovieRepository
     {
         public List<Movie> GetMovies()
