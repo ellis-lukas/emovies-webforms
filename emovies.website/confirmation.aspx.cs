@@ -14,12 +14,8 @@ namespace emovies.website
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            VisitorInfo = new CustomerInfo(Session);
 
-        }
-
-        protected void Page_PreInit(object sender, EventArgs e)
-        {
-            VisitorInfo.fillOutVisitorInfo(Session);
         }
     }
 }

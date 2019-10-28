@@ -17,5 +17,3 @@ function checkboxChanged() {
 
 checkBox.addEventListener("change", checkboxChanged);
 
-
-

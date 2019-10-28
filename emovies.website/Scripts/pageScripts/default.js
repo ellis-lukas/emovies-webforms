@@ -1,35 +1,55 @@
 ﻿const updateButton = document.querySelector(".update__button");
 const totalValueCell = document.querySelector(".total__cell--value");
 const movieList = document.querySelectorAll(".table-row");
+const body = document.querySelector("body");
 
-function calculateIndividualMovieTotal(movie) {
-    var movieTotal = 0.0;
-    var quantityCell = movie.querySelector(".table-row__cell--quantity");
-    var priceCell = movie.querySelector(".table-row__price-bucket");
-    var quantity;
-    if (quantityCell.value == "") {
-        quantity = 0;
-    }
-    else {
-        quantity = parseInt(quantityCell.value);
-    }
-    var price = parseFloat(priceCell.value);
-    movieTotal = quantity * price;
-    return movieTotal;
+function prepareMovieTable() {
+    updateTotal();
 }
 
-function calculateTotal() {
-    var total = 0.0;
-    movieList.forEach((movie) => {
-        total += calculateIndividualMovieTotal(movie);
-    });
-    return total;
+function updateTable() {
+    updateTotal();
 }
 
 function updateTotal() {
     totalValueCell.innerHTML = "£" + calculateTotal().toFixed(2);
 }
 
-updateButton.addEventListener("click", updateTotal);
+function calculateTotal() {
+    var total = 0.0;
+    movieList.forEach((movie) => {
+        total += individualMovieTotal(movie);
+    });
+    return total;
+}
 
-updateTotal();
+function individualMovieTotal(movie) {
+    var numberOfTicketsOrdered = quantityCellValue(movie);
+    var moviePrice = priceCellValue(movie);
+    var movieTotal = numberOfTicketsOrdered * moviePrice;
+    return movieTotal;
+}
+
+function priceCellValue(movie) {
+    var priceCell = movie.querySelector(".table-row__price-bucket");
+    var priceCellValue = parseFloat(priceCell.value);
+    return priceCellValue;
+}
+
+function quantityCellValue(movie) {
+    var quantityCell = movie.querySelector(".table-row__cell--quantity");
+    if (quantityCell.value == "") {
+        return 0;
+    }
+    return parseInt(quantityCell.value); 
+}
+
+prepareMovieTable();
+
+updateButton.addEventListener("click", updateTable);
+
+
+
+
+
+
