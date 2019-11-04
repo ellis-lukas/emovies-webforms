@@ -4,23 +4,22 @@
     <h1>Order</h1>
     <div class="info info--order">
         <div class="form">
-            <div class="form-row form-row--upper">
+            <%--<div class="form-row form-row--upper">
                 <label for="Name" class="form-row__cell form-row__cell--label">Name</label>
                 <asp:TextBox ID="Name" CssClass="form-row__name form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="NamePresenceValidator" ControlToValidate="Name" runat="server" EnableClientScript="true"/>
-                <asp:RegularExpressionValidator ID="NameFormatValidator" ControlToValidate="Name" runat="server" EnableClientScript="true"/>
+                <asp:RequiredFieldValidator ID="NamePresenceValidator" ControlToValidate="Name" runat="server" EnableClientScript="true" />
+                <asp:RegularExpressionValidator ID="NameFormatValidator" ControlToValidate="Name" runat="server" EnableClientScript="true" />
+            </div>--%>
+            <div class="form-row form-row--upper">
+                <label for="Name" class="form-row__cell form-row__cell--label">Name</label>
+                <UserControl:TextInput ID="Name" CssClass="form-row__name form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server" EnableClientScript="True";/>
             </div>
             <div class="form-row form-row--upper">
                 <label for="Email" class="form-row__cell form-row__cell--label">Email</label>
-                <asp:TextBox ID="Email" CssClass="form-row__email form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="EmailPresenceValidator" ControlToValidate="Email" Display="None" ErrorMessage="email address is required" runat="server" EnableClientScript="true"/>
-                <asp:RegularExpressionValidator ID="EmailFormatValidator" ControlToValidate="Email" runat="server" EnableClientScript="true"/>
             </div>
             <div class="form-row form-row--upper">
                 <label for="CardNumber" class="form-row__cell form-row__cell--label">Credit card number</label>
-                <asp:TextBox ID="CardNumber" CssClass="form-row__card-number form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="CardNumberPresenceValidator" ControlToValidate="CardNumber" Display="None" ErrorMessage="card number is required" runat="server" EnableClientScript="true"/>
-                <asp:RegularExpressionValidator ID="CardNumberFormatValidator" ControlToValidate="CardNumber" Display="None" runat="server"  ValidationExpression="\s*([0-9]\s*){15,19}" ErrorMessage="Invalid card number entered" EnableClientScript="true"/>
+                <UserControl:TextInput ID="CardNumber" CssClass="form-row__card-number form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server" EnableClientScript="true"/>
             </div>
             <div class="form-row form-row--lower">
                 <label for="CardType" class="form-row__cell form-row__cell--label">Credit card type</label>
@@ -41,8 +40,8 @@
         </div>
     </div>
     <div class="order order--submit-order">
-        <asp:Button CssClass="order__button" Text="Submit order >>" type="submit" OnClick="SubmitOrderClicked" runat="server"/>
+        <asp:Button CssClass="order__button" Text="Submit order >>" type="submit" OnClick="SubmitOrderClicked" runat="server" />
     </div>
-    <asp:ValidationSummary ID="OrderPageValidationSummary" runat="server" DisplayMode="BulletList" ShowMessageBox="true" ShowSummary="false" HeaderText="Details Validation Issue" EnableClientScript="True"/>
+    <asp:ValidationSummary ID="OrderPageValidationSummary" runat="server" DisplayMode="BulletList" ShowMessageBox="true" ShowSummary="false" HeaderText="Details Validation Issue" EnableClientScript="True" />
     <script type="text/javascript" src="Scripts/pageScripts/order.js"></script>
 </asp:Content>

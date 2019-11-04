@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="confirmation.aspx" />
+    <Content Include="Controls\UserTextInputControl.ascx" />
     <Content Include="order.aspx" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
@@ -147,6 +148,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controls\UserTextInputControl.ascx.cs">
+      <DependentUpon>UserTextInputControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\UserTextInputControl.ascx.designer.cs">
+      <DependentUpon>UserTextInputControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Data\CustomerInformationMapper.cs" />
     <Compile Include="Data\ProtectedCardNumber.cs" />
     <Compile Include="Data\CustomerInformation.cs" />

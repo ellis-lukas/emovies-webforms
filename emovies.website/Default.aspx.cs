@@ -12,13 +12,8 @@ namespace emovies.website
 {
     public partial class Default : Page
     {
-        private List<Movie> CurrentMovies
-        {
-            get
-            {
-                return new MovieRepository().GetMovies();
-            }
-        }
+
+        public static List<Movie> CurrentMovies = new MovieRepository().GetMovies();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -98,7 +93,7 @@ namespace emovies.website
         public void Save_Order_To_Session()
         {
             RepeaterItemCollection returnedMovieTable = RepeaterBrowse.Items;
-            List<MovieOrder> MovieOrderList = PopulateFromReturnedTable(returnedMovieTable);
+            List<MovieOrder> MovieOrderList = new List<MovieOrder>().PopulateFromReturnedTable(returnedMovieTable);
             Session["Orders"] = MovieOrderList;
         }
     }
