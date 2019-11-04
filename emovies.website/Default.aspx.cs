@@ -12,25 +12,94 @@ namespace emovies.website
 {
     public partial class Default : Page
     {
-        //public List<Movie> MovieList = new MovieRepository().GetMovies();
+        private List<Movie> CurrentMovies
+        {
+            get
+            {
+                return new MovieRepository().GetMovies();
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                Session["MovieList"] = new MovieRepository().GetMovies();
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
-                Repeater1.DataSource = (List<Movie>)Session["MovieList"];
-                Repeater1.DataBind();
+                SetupBrowsePageOnFirstLoad();
             }
         }
 
-        protected void OrderNowClicked(object sender, EventArgs e)
+        public void SetupBrowsePageOnFirstLoad()
         {
-            List<OrderMade> OrderMadeList = new List<OrderMade>().PopulateOrderListFromMovieTable(Repeater1.Items, (List<Movie>)Session["MovieList"]);
-            Session["Total"] = OrderMadeList.Total((List<Movie>)Session["MovieList"]);
-            Session["OrderMade"] = OrderMadeList;
+            SetPageCultureToBritish();
+            LoadMoviesIntoPage();
+            SetUpBrowsePageValidation();
+        }
+
+        public static void SetPageCultureToBritish()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+        }
+
+        public void LoadMoviesIntoPage()
+        {
+            RepeaterBrowse.DataSource = CurrentMovies;
+            RepeaterBrowse.DataBind();
+        }
+
+        public void SetUpBrowsePageValidation()
+        {
+            SetUpBrowsePageInputValidation();
+            SetUpBrowsePageValidationSummary(BrowsePageValidationSummary);
+        }
+
+        public void SetUpBrowsePageInputValidation()
+        {
+            SetUpNonZeroValidation();
+            SetUpSelectionUpdatedValidation();
+        }
+
+        public void SetUpNonZeroValidation()
+        {
+            SetUpNonZeroValidator(NonZeroValidator);
+        }
+
+        public void SetUpSelectionUpdatedValidation()
+        {
+            SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
+        }
+
+        public void SetUpNonZeroValidator(CustomValidator nonZeroValidator)
+        {
+            nonZeroValidator.Display = ValidatorDisplay.None;
+            nonZeroValidator.ErrorMessage = "No movies selected";
+        }
+
+        public void SetUpSelectionUpdatedValidator(CustomValidator selectionUpdatedValidator)
+        {
+            selectionUpdatedValidator.Display = ValidatorDisplay.None;
+            selectionUpdatedValidator.ErrorMessage = "Selection not updated";
+        }
+
+        public void SetUpBrowsePageValidationSummary(ValidationSummary browsePageValidationSummary)
+        {
+            browsePageValidationSummary.DisplayMode = ValidationSummaryDisplayMode.BulletList;
+            browsePageValidationSummary.ShowMessageBox = false;
+            browsePageValidationSummary.ShowSummary = true; 
+        }
+
+        protected void Order_Now_Clicked(object sender, EventArgs e)
+        {
+            Save_Order_To_Session();
             Response.Redirect("order.aspx");
+        }
+
+
+
+        public void Save_Order_To_Session()
+        {
+            RepeaterItemCollection returnedMovieTable = RepeaterBrowse.Items;
+            List<MovieOrder> MovieOrderList = PopulateFromReturnedTable(returnedMovieTable);
+            Session["Orders"] = MovieOrderList;
         }
     }
 }

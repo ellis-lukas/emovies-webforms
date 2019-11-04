@@ -4,7 +4,7 @@
     <h1>Browse movie tickets</h1>
     <div class="info info--movie">
         <div class="table">
-            <asp:Repeater ID="Repeater1" runat="server">
+            <asp:Repeater ID="RepeaterBrowse" runat="server">
                 <HeaderTemplate>
                     <div class="table-heading">
                         <div class="table-heading__cell table-heading__cell--movie">Movie</div>
@@ -15,15 +15,13 @@
                 <ItemTemplate>
                     <div class="table-row">
                         <div class="table-row__cell table-row__cell--movie table-row__cell--blue"><%# Eval("Name") %></div>
-                        <!--
-                            <input class="table-row__cell table-row__cell--quantity table-row__cell--white" type="number" value="0" name="quantity" min="0" max="254">
-                        -->
                         <asp:TextBox ID="quantity" Cssclass="table-row__cell table-row__cell--quantity table-row__cell--white" type="number" value="0" min="0" max="254" runat="server"></asp:TextBox>
                         <div class="table-row__cell table-row__cell--price table-row__cell--blue"><%# Eval("Price", "{0:c}") %></div>
                         <input type="hidden" class="table-row__price-bucket" value="<%# Eval("Price") %>" />
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
+            <asp:CustomValidator ID="NonZeroValidator" runat="server" EnableClientScript="true" ClientValidationFunction="ValidateQuantityInputsNonZero"></asp:CustomValidator>
             <div class="total total--table">
                 <div class="total__cell total__cell--label total__cell--label-table">Total</div>
                 <div class="total__cell total__cell--value total__cell--value-table"></div>
@@ -35,7 +33,9 @@
     </div>
     <div class="notice">Tickets are only valid for use on the day of purchase</div>
     <div class="order order--order-now">
-        <asp:Button CssClass="order__button" Text="Order now >>" OnClick="OrderNowClicked" runat="server"/>
+        <asp:Button ID="OrderNowButton" CssClass="order__button" Text="Order now >>" OnClick="Order_Now_Clicked" runat="server"/>
     </div>
+    <asp:CustomValidator ID="SelectionUpdatedValidator" runat="server" ClientValidationFunction ="ValidateSelectionUpdated"></asp:CustomValidator>
+    <asp:ValidationSummary ID="BrowsePageValidationSummary" runat="server" EnableClientScript="true"/>
     <script type="text/javascript" src="Scripts/pageScripts/default.js"></script>
 </asp:Content>

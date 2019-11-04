@@ -147,7 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="Data\CustomerInfo.cs" />
+    <Compile Include="Data\CustomerInformationMapper.cs" />
+    <Compile Include="Data\ProtectedCardNumber.cs" />
+    <Compile Include="Data\CustomerInformation.cs" />
     <Compile Include="Data\Movie.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="confirmation.aspx.cs">
@@ -159,7 +161,7 @@
     </Compile>
     <Compile Include="Data\MovieRepository.cs" />
     <Compile Include="Data\ListExtensions.cs" />
-    <Compile Include="Data\OrderMade.cs" />
+    <Compile Include="Data\MovieOrder.cs" />
     <Compile Include="order.aspx.cs">
       <DependentUpon>order.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

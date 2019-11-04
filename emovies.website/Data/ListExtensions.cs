@@ -6,46 +6,75 @@ using System.Web.UI.WebControls;
 
 namespace emovies.website.Data
 {
-    //keep this as a class for now. Eventually, when loading in from a database, it might be worth changing this file to a group of interfaces and classes
     public static class ListExtensions
     {
-        private static int GetQuantityFromRepeatedRow(RepeaterItem row)
+        //      List<Movie> "Constructor" START     //
+
+        public static List<MovieOrder> PopulateFromReturnedTable(this List<MovieOrder> orderList, RepeaterItemCollection returnedTable)
         {
-            TextBox quantityTextBox = (TextBox)(row.FindControl("quantity"));
-            int quantity = int.Parse(quantityTextBox.Text);
-            return quantity;
-        }
-
-        public static List<OrderMade> PopulateOrderListFromMovieTable (this List<OrderMade> orderList, RepeaterItemCollection repeaterItemCollection, List<Movie> movieList)
-        {
-            List<OrderMade> orders = new List<OrderMade>();
-            int counter = 0;
-
-            foreach (RepeaterItem item in repeaterItemCollection)
-            {
-                int _quantity = GetQuantityFromRepeatedRow(item);
-                if (_quantity != 0)
-                {
-                    int _Id = orders.Count + 1;
-                    int _MovieId = movieList[counter].Id;
-                    orders.Add(new OrderMade { Id = _Id, MovieId = _MovieId, Quantity = _quantity });
-                }
-                counter++;
-            }
-
+            List<RepeaterItem> returnedList = returnedTable.ToPreferableListForm();
+            List<MovieOrder> orders = returnedList.ExtractOrders();
+            orders.AscribeIds();
             return orders;
         }
 
-        public static decimal Total (this List<OrderMade> orderList, List<Movie> movieList)
+        public static List<RepeaterItem> ToPreferableListForm(this RepeaterItemCollection repeaterItemCollection)
+        {
+            List<RepeaterItem> listOfRepeaterItems = new List<RepeaterItem>();
+            foreach (RepeaterItem repeaterItem in repeaterItemCollection)
+            {
+                listOfRepeaterItems.Add(repeaterItem);
+            }
+            return listOfRepeaterItems;
+        }
+
+        public static List<MovieOrder> ExtractOrders(this List<RepeaterItem> returnedList)
+        {
+            List<MovieOrder> orders = new List<MovieOrder>();
+            for (int i = 0; i < Default.CurrentMovies.Count; i++)
+            {
+                int quantityOrdered = GetQuantityFromMovieListing(returnedList[i]);
+                if (quantityOrdered != 0)
+                {
+                    orders.Add(new MovieOrder { MovieId = i + 1, Quantity = quantityOrdered });
+                }
+            }
+            return orders;
+        }
+
+        private static int GetQuantityFromMovieListing(RepeaterItem movieListing)
+        {
+            TextBox movieListingQuantityCell = (TextBox)(movieListing.FindControl("quantity"));
+            int movieListingQuantity = int.Parse(movieListingQuantityCell.Text);
+            return movieListingQuantity;
+        }
+
+        public static void AscribeIds(this List<MovieOrder> orders)
+        {
+            foreach (MovieOrder movieOrder in orders)
+            {
+                movieOrder.Id = 1 + orders.IndexOf(movieOrder);
+            }
+        }
+
+        //      List<Movie> "Constructor" END       //
+
+        //      Behaviour ie. location of "reason to change"       //
+
+        public static decimal Total (this List<MovieOrder> orderList)
         {
             decimal Total = 0.0m;
-
-            foreach (OrderMade order in orderList)
+            foreach (MovieOrder order in orderList)
             {
-                Total += order.Quantity * movieList[order.MovieId - 1].Price;
+                Total += MovieOrderTotal(order);
             }
-
             return Total;
         }
+
+        public static decimal MovieOrderTotal(MovieOrder order)
+        {
+            return order.Quantity * Default.CurrentMovies[order.MovieId - 1].Price;
+        }
+
     }
 }

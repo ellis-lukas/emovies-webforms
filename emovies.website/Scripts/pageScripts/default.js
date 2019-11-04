@@ -1,14 +1,18 @@
 ﻿const updateButton = document.querySelector(".update__button");
+const orderButton = document.querySelector(".order__button")
 const totalValueCell = document.querySelector(".total__cell--value");
 const movieList = document.querySelectorAll(".table-row");
-const body = document.querySelector("body");
+
+var quantityArrayOnSubmission = [];
+var quantityArrayOnUpdate = [];
 
 function prepareMovieTable() {
     updateTotal();
 }
 
-function updateTable() {
+function update() {
     updateTotal();
+    captureQuantitiesOnUpdate();
 }
 
 function updateTotal() {
@@ -41,12 +45,67 @@ function quantityCellValue(movie) {
     if (quantityCell.value == "") {
         return 0;
     }
-    return parseInt(quantityCell.value); 
+    return parseInt(quantityCell.value);
+}
+
+function QuantityInputs() {
+    this.quantityCells = document.querySelectorAll(".table-row__cell--quantity");
+    this.areZero = function () { return arrayAllZeros(this.extractArray()); }
+    this.extractArray = function () { return extractQuantityArray(this.quantityCells); }
+}
+
+function arrayAllZeros(array) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function extractQuantityArray(quantityCells) {
+    return Array.from(quantityCells).map(DOMObjectValue);
+}
+
+function DOMObjectValue(DOMObject) {
+    return DOMObject.value;
+}
+
+function ValidateQuantityInputsNonZero(sender, args) {
+    var quantityInputs = new QuantityInputs();
+    args.IsValid = !(quantityInputs.areZero());
+}
+
+function captureQuantitiesOnUpdate() {
+    quantityArrayOnUpdate = new QuantityInputs().extractArray();
+}
+
+function captureQuantitiesOnSubmission() {
+    quantityArrayOnSubmission = new QuantityInputs().extractArray();
+}
+
+function ValidateSelectionUpdated(sender, args) {
+    captureQuantitiesOnSubmission();
+    if (arraysAreEqual(quantityArrayOnSubmission, quantityArrayOnUpdate)) {
+        args.IsValid = true;
+    }
+    else if (arrayAllZeros(quantityArrayOnSubmission)) {
+        args.IsValid = true;
+    }
+    else {
+        args.IsValid = false;
+    }
+}
+
+
+function arraysAreEqual(arrayA, arrayB) {
+    return (JSON.stringify(arrayA) === JSON.stringify(arrayB));
 }
 
 prepareMovieTable();
+updateButton.addEventListener("click", update);
 
-updateButton.addEventListener("click", updateTable);
+
 
 
 
