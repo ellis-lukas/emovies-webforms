@@ -104,9 +104,9 @@ namespace emovies.website
 
         protected void SubmitOrderClicked(object sender, EventArgs e)
         {
-            Session["Name"] = Name.
-            Session["Email"] = Email.Text;
-            Session["CardNumber"] = CardNumber.Text;
+            Session["Name"] = (TextInput)Name1;
+            //Session["Email"] = Email.Text;
+            //Session["CardNumber"] = CardNumber.Text;
             Session["CardType"] = CardType.Text;
             Session["FuturePromotions"] = Convert.ToInt32(FuturePromotions.Checked);
             Response.Redirect("confirmation.aspx");

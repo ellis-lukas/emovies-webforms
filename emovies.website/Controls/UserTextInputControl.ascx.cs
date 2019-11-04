@@ -25,62 +25,62 @@ namespace emovies.website.Controls
             set { TextInput.MaxLength = value; }
         }
 
-        public string RegularExpressionText
-        {
-            set { RegularExpressionValidator.Text = value; }
-        }
+        //public string RegularExpressionText
+        //{
+        //    set { RegularExpressionValidator.Text = value; }
+        //}
 
-        public ValidatorDisplay RequiredFieldDisplay
-        {
-            set { RequiredFieldValidator.Display = value; }
-        }
+        //public ValidatorDisplay RequiredFieldDisplay
+        //{
+        //    set { RequiredFieldValidator.Display = value; }
+        //}
 
-        public ValidatorDisplay RegularExpressionDisplay
-        {
-            set { RegularExpressionValidator.Display = value; }
-        }
+        //public ValidatorDisplay RegularExpressionDisplay
+        //{
+        //    set { RegularExpressionValidator.Display = value; }
+        //}
 
-        public bool EnabledRequiredField
-        {
-            set { RequiredFieldValidator.Enabled = value; }
-        }
+        //public bool EnabledRequiredField
+        //{
+        //    set { RequiredFieldValidator.Enabled = value; }
+        //}
 
-        public bool EnabledRegularExpression
-        {
-            set { RegularExpressionValidator.Enabled = value; }
-        }
+        //public bool EnabledRegularExpression
+        //{
+        //    set { RegularExpressionValidator.Enabled = value; }
+        //}
 
-        public string ErrorMsgForRequiredField
-        {
-            set { RequiredFieldValidator.ErrorMessage = value; }
-        }
+        //public string ErrorMsgForRequiredField
+        //{
+        //    set { RequiredFieldValidator.ErrorMessage = value; }
+        //}
 
-        public string ErrorMsgForRegularExpression
-        {
-            set { RegularExpressionValidator.ErrorMessage = value; }
-        }
+        //public string ErrorMsgForRegularExpression
+        //{
+        //    set { RegularExpressionValidator.ErrorMessage = value; }
+        //}
 
-        public string ValidationExpression
-        {
-            set { RegularExpressionValidator.ValidationExpression = value; }
-        }
+        //public string ValidationExpression
+        //{
+        //    set { RegularExpressionValidator.ValidationExpression = value; }
+        //}
 
-        public string ValidationGroup
-        {
-            set
-            {
-                RegularExpressionValidator.ValidationGroup = value;
-                RequiredFieldValidator.ValidationGroup = value;
-            }
-        }
+        //public string ValidationGroup
+        //{
+        //    set
+        //    {
+        //        RegularExpressionValidator.ValidationGroup = value;
+        //        RequiredFieldValidator.ValidationGroup = value;
+        //    }
+        //}
 
-        public bool EnableClientScript
-        {
-            set
-            {
-                RegularExpressionValidator.EnableClientScript = value;
-                RequiredFieldValidator.EnableClientScript = value;
-            }
-        }
+        //public bool EnableClientScript
+        //{
+        //    set
+        //    {
+        //        RegularExpressionValidator.EnableClientScript = value;
+        //        RequiredFieldValidator.EnableClientScript = value;
+        //    }
+        //}
     }
 }

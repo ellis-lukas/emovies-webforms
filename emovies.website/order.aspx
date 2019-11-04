@@ -11,16 +11,17 @@
                 <asp:RegularExpressionValidator ID="NameFormatValidator" ControlToValidate="Name" runat="server" EnableClientScript="true" />
             </div>--%>
             <div class="form-row form-row--upper">
-                <label for="Name" class="form-row__cell form-row__cell--label">Name</label>
-                <UserControl:TextInput ID="Name" CssClass="form-row__name form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server" EnableClientScript="True";/>
+                <label for="Name1" class="form-row__cell form-row__cell--label">Name</label>
+                <UserControl:TextInput ID="Name1" CssClass="form-row__name form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server" EnableClientScript="True";/>
             </div>
-            <div class="form-row form-row--upper">
+            <%--<div class="form-row form-row--upper">
                 <label for="Email" class="form-row__cell form-row__cell--label">Email</label>
+                <UserControl:TextInput CssClass="form-row__email form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server" EnableClientScript="true" />
             </div>
             <div class="form-row form-row--upper">
                 <label for="CardNumber" class="form-row__cell form-row__cell--label">Credit card number</label>
-                <UserControl:TextInput ID="CardNumber" CssClass="form-row__card-number form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server" EnableClientScript="true"/>
-            </div>
+                <UserControl:TextInput ID="CardkkNumber" CssClass="form-row__card-number form-row__cell form-row__cell--input form-row__cell--text form-row__cell--white" runat="server" EnableClientScript="true"/>
+            </div>--%>
             <div class="form-row form-row--lower">
                 <label for="CardType" class="form-row__cell form-row__cell--label">Credit card type</label>
                 <asp:DropDownList ID="CardType" CssClass="form-row__card-type form-row__cell form-row__cell--input form-row__cell--select form-row__cell--white" runat="server">

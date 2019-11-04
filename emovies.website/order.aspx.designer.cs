@@ -13,24 +13,6 @@ namespace emovies.website
 
     public partial class Order
     {
-        protected global::emovies.website.Controls.UserTextInputControl Name;
-        /// <summary>
-        /// Email control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::emovies.website.Controls.UserTextInputControl Email;
-
-        /// <summary>
-        /// CardNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::emovies.website.Controls.UserTextInputControl CardNumber;
 
         /// <summary>
         /// CardType control.
