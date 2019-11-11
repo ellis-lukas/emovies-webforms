@@ -12,6 +12,6 @@ namespace emovies.website.Data
         public string Email { get; set; }
         public string CardNumber { get; set; }
         public string CardType { get; set; }
-        public string FuturePromotions { get; set; }
+        public bool FuturePromotions { get; set; }
     }
 }

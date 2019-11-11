@@ -80,7 +80,7 @@ namespace emovies.website
             Session["Email"] = Email.Text;
             Session["CardNumber"] = CardNumber.Text;
             Session["CardType"] = CardType.Text;
-            Session["FuturePromotions"] = (FuturePromotions.Checked == true) ? "Yes" : "No";
+            Session["FuturePromotions"] = FuturePromotions.Checked;
             Response.Redirect("confirmation.aspx");
         }
     }

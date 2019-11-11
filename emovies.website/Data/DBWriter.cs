@@ -11,7 +11,7 @@ namespace emovies.website.Data
     {
         public static void WriteToDB(DataStagedForDBWrite stagedData)
         {
-            SqlConnection dbConnection = new SqlConnection(@"Server=xena\sql2017;Database=emovies.Lukas;User Id=emovies.Lukas;Password=emovies;");
+            SqlConnection dbConnection = new SqlConnection(@"Server=xena\sql2017;Database=emovies.Lukas;User Id=emovies.Lukas;Password=emovies;MultipleActiveResultSets=True;");
             dbConnection.Open();
 
             SqlCommand customerCommand = new SqlCommand("AddNewCustomer", dbConnection)
@@ -23,8 +23,8 @@ namespace emovies.website.Data
 
             customerCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = customer.Name;
             customerCommand.Parameters.Add("@Email", SqlDbType.NVarChar).Value = customer.Email;
-            customerCommand.Parameters.Add("@CardNumber", SqlDbType.NVarChar).Value = customer.CardNumber;
-            customerCommand.Parameters.Add("@CardType", SqlDbType.NVarChar).Value = customer.CardType;
+            customerCommand.Parameters.Add("@CreditCardNumber", SqlDbType.NVarChar).Value = customer.CardNumber;
+            customerCommand.Parameters.Add("@CreditCardType", SqlDbType.NVarChar).Value = customer.CardType;
             customerCommand.Parameters.Add("@FuturePromotions", SqlDbType.Bit).Value = customer.FuturePromotions;
             customerCommand.Parameters.Add("@DateCreated", SqlDbType.DateTime).Value = DateTime.Now;
 

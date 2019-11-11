@@ -13,7 +13,7 @@ namespace emovies.website.Data
             decimal Total = 0.0m;
             foreach (MovieOrder order in orderList)
             {
-                Total += order.MovieOrderTotal();
+                Total += order.Price * order.Quantity;
             }
             return Total;
         }

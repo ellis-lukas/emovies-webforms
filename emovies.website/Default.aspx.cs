@@ -12,7 +12,13 @@ namespace emovies.website
 {
     public partial class Default : Page
     {
-        public static List<Movie> CurrentMovies = new MovieRepository().GetMovies();
+        public List<Movie> CurrentMovies { get
+            { return new MovieRepository().GetMovies(); }
+        }
+
+        public List<Movie> CurrentMoviesInRenderOrder { get 
+            { return CurrentMovies; }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,14 +35,14 @@ namespace emovies.website
             SetUpBrowsePageValidation();
         }
 
-        public static void SetPageCultureToBritish()
+        public void SetPageCultureToBritish()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
         }
 
         public void LoadMoviesIntoPage()
         {
-            RepeaterBrowse.DataSource = CurrentMovies;
+            RepeaterBrowse.DataSource = CurrentMoviesInRenderOrder;
             RepeaterBrowse.DataBind();
         }
 
@@ -57,15 +63,15 @@ namespace emovies.website
             SetUpNonZeroValidator(NonZeroValidator);
         }
 
-        public void SetUpSelectionUpdatedValidation()
-        {
-            SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
-        }
-
         public void SetUpNonZeroValidator(CustomValidator nonZeroValidator)
         {
             nonZeroValidator.Display = ValidatorDisplay.None;
             nonZeroValidator.ErrorMessage = "No movies selected";
+        }
+
+        public void SetUpSelectionUpdatedValidation()
+        {
+            SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
         }
 
         public void SetUpSelectionUpdatedValidator(CustomValidator selectionUpdatedValidator)
@@ -90,7 +96,8 @@ namespace emovies.website
         public void SaveOrderToSession()
         {
             RepeaterItemCollection returnedMovieTable = RepeaterBrowse.Items;
-            List<MovieOrder> moviesOrdered = ListOfMoviesOrderedGenerator.GenerateFromReturnedTable(returnedMovieTable);
+            List<int> quantityList = new QuantityReader(returnedMovieTable).GetQuantityList();
+            List<MovieOrder> moviesOrdered = new ListOfMovieOrderGenerator(quantityList, CurrentMoviesInRenderOrder).GenerateMovieOrders();
             Session["MoviesOrdered"] = moviesOrdered;
         }
     }

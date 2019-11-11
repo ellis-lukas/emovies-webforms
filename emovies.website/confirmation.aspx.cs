@@ -12,8 +12,13 @@ namespace emovies.website
 {
     public partial class Confirmation : Page
     {
-        public static Customer VisitorInformation;
         public static List<MovieOrder> Orders;
+
+        public List<Movie> CurrentMovies
+        {
+            get
+            { return new MovieRepository().GetMovies(); }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,7 +43,7 @@ namespace emovies.website
 
         public void SetPageMemberVariables()
         {
-            Orders = (List<MovieOrder>)Session["Orders"];
+            Orders = (List<MovieOrder>)Session["MoviesOrdered"];
         }
 
         public void PopulatePageWithOrderData()
@@ -53,7 +58,7 @@ namespace emovies.website
             CustomerEmail.Text = (string)Session["Email"];
             CustomerCardNumber.Text = (string)Session["CardNumber"];
             CustomerCardType.Text = (string)Session["CardType"];
-            CustomerFuturePromotions.Text = (string)Session["FuturePromotions"];
+            CustomerFuturePromotions.Text = ((bool)Session["FuturePromotions"] == true) ? "Yes" : "No";
         }
 
         public void LoadOrderTableIntoPage()

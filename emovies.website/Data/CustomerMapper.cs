@@ -12,7 +12,7 @@ namespace emovies.website.Data
                 Email = (string)sessionState["Email"],
                 CardNumber = (string)sessionState["CardNumber"],
                 CardType = (string)sessionState["CardType"],
-                FuturePromotions = (string)sessionState["FuturePromotions"]
+                FuturePromotions = (bool)sessionState["FuturePromotions"]
             };
         }
     }
