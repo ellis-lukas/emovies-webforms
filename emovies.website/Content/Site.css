@@ -248,7 +248,7 @@ select {
     width: 192px;
 }
 
-.form-row__cell--container {
+.form-row__cell--checkbox-container {
     height: 18px;
     width: 18px;
 }
@@ -258,7 +258,7 @@ select {
     position: relative;
 }
 
-.form-row__checklabel {
+.form-row__check-image {
     display: block;
     height: 18px;
     width: 18px;

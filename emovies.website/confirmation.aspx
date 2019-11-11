@@ -34,8 +34,8 @@
             <asp:Repeater ID="RepeaterConfirmation" runat="server">
                 <ItemTemplate>
                     <div class="summary-row">
-                        <div class="summary-row__cell summary-row__cell--movie"><%# ((emovies.website.Data.MovieOrder)(Container.DataItem)).GetMovie().Name.ToString() %> </div>
-                        <div class="summary-row__cell summary-row__cell--order"><%# Eval("Quantity") %> x <%# string.Format("{0:c}", ((emovies.website.Data.MovieOrder)(Container.DataItem)).GetMovie().Price) %></div>
+                        <div class="summary-row__cell summary-row__cell--movie"></div>
+                        <div class="summary-row__cell summary-row__cell--order"></div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>

@@ -21,25 +21,7 @@ namespace emovies.website
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Name;
-
-        /// <summary>
-        /// NamePresenceValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator NamePresenceValidator;
-
-        /// <summary>
-        /// NameFormatValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator NameFormatValidator;
+        protected global::emovies.website.Controls.UserTextInputControl Name;
 
         /// <summary>
         /// Email control.
@@ -48,25 +30,7 @@ namespace emovies.website
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email;
-
-        /// <summary>
-        /// EmailPresenceValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmailPresenceValidator;
-
-        /// <summary>
-        /// EmailFormatValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator EmailFormatValidator;
+        protected global::emovies.website.Controls.UserTextInputControl Email;
 
         /// <summary>
         /// CardNumber control.
@@ -75,25 +39,7 @@ namespace emovies.website
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CardNumber;
-
-        /// <summary>
-        /// CardNumberPresenceValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator CardNumberPresenceValidator;
-
-        /// <summary>
-        /// CardNumberFormatValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator CardNumberFormatValidator;
+        protected global::emovies.website.Controls.UserTextInputControl CardNumber;
 
         /// <summary>
         /// CardType control.
@@ -114,13 +60,13 @@ namespace emovies.website
         protected global::System.Web.UI.WebControls.CheckBox FuturePromotions;
 
         /// <summary>
-        /// CheckLabel control.
+        /// CheckImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CheckLabel;
+        protected global::System.Web.UI.WebControls.Label CheckImage;
 
         /// <summary>
         /// OrderPageValidationSummary control.

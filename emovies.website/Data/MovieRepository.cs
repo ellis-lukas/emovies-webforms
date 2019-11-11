@@ -25,6 +25,16 @@ namespace emovies.website.Data
             new Movie {Id=6, Name="Movie 6", Price=4.49m}
             };
         }
+
+        //public Movie GetMovie(int movieID)
+        //{
+        //    List<Movie> currentMovies = new MovieRepository().GetMovies();
+        //    foreach (Movie movie in currentMovies)
+        //    {
+        //        if (movie.Id == movieID)
+        //            return movie;
+        //    }
+        //}
     }
 
     public class MovieDatabaseRepository : IMovieRepository

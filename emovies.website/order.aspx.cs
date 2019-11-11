@@ -39,59 +39,32 @@ namespace emovies.website
 
         public void SetUpNameValidation()
         {
-            SetUpNamePresenceValidator(NamePresenceValidator);
-            SetUpNameFormatValidator(NameFormatValidator);
-        }
-
-        public void SetUpNamePresenceValidator(RequiredFieldValidator namePresenceValidator)
-        {
-            namePresenceValidator.Display = ValidatorDisplay.None;
-            namePresenceValidator.ErrorMessage = "Name is required";
-        }
-
-        public void SetUpNameFormatValidator(RegularExpressionValidator nameFormatValidator)
-        {
-            nameFormatValidator.Display = ValidatorDisplay.None;
-            nameFormatValidator.ValidationExpression = "\s*[\w]+(\.){0,1}((\s+[\w]+(-){0,1}[\w]+)|(\s+[\w]+))*\s*";
-            nameFormatValidator.ErrorMessage = "Invalid name entered";
+            Name.RequiredFieldDisplay = ValidatorDisplay.None;
+            Name.RegularExpressionDisplay = ValidatorDisplay.None;
+            Name.ErrorMsgForRequiredField = "Name is required";
+            Name.ErrorMsgForRegularExpression = "Invalid name entered";
+            Name.ValidationExpression = @"\s*[\w]+(\.){0,1}((\s+[\w]+(-){0,1}[\w]+)|(\s+[\w]+))*\s*";
+            Name.EnableClientScript = true;
         }
 
         public void SetUpEmailValidation()
         {
-            SetUpEmailPresenceValidator(EmailPresenceValidator);
-            SetUpEmailFormatValidator(EmailFormatValidator);
-        }
-
-        public void SetUpEmailPresenceValidator(RequiredFieldValidator emailPresenceValidator)
-        {
-            emailPresenceValidator.Display = ValidatorDisplay.None;
-            emailPresenceValidator.ErrorMessage = "Email address is required";
-        }
-
-        public void SetUpEmailFormatValidator(RegularExpressionValidator emailFormatValidator)
-        {
-            emailFormatValidator.Display = ValidatorDisplay.None;
-            emailFormatValidator.ValidationExpression = "\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\s*";
-            emailFormatValidator.ErrorMessage = "Invalid email address entered";
+            Email.RequiredFieldDisplay = ValidatorDisplay.None;
+            Email.RegularExpressionDisplay = ValidatorDisplay.None;
+            Email.ErrorMsgForRequiredField = "Email address is required";
+            Email.ErrorMsgForRegularExpression = "Invalid email address entered";
+            Email.ValidationExpression = @"\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\s*";
+            Email.EnableClientScript = true;
         }
 
         public void SetUpCardNumberValidation()
         {
-            SetUpCardNumberPresenceValidator(CardNumberPresenceValidator);
-            SetUpCardNumberFormatValidator(CardNumberFormatValidator);
-        }
-
-        public void SetUpCardNumberPresenceValidator(RequiredFieldValidator cardNumberPresenceValidator)
-        {
-            cardNumberPresenceValidator.Display = ValidatorDisplay.None;
-            cardNumberPresenceValidator.ErrorMessage = "Card number required";
-        }
-
-        public void SetUpCardNumberFormatValidator (RegularExpressionValidator cardNumberFormatValidator)
-        {
-            cardNumberFormatValidator.Display = ValidatorDisplay.None;
-            cardNumberFormatValidator.ValidationExpression = "\s*([0-9]\s*){15,19}";
-            cardNumberFormatValidator.ErrorMessage = "Invalid card number entered";
+            CardNumber.RequiredFieldDisplay = ValidatorDisplay.None;
+            CardNumber.RegularExpressionDisplay = ValidatorDisplay.None;
+            CardNumber.ErrorMsgForRequiredField = "Card number required";
+            CardNumber.ErrorMsgForRegularExpression = "Invalid card number entered";
+            CardNumber.ValidationExpression = @"\s*([0-9]\s*){15,19}";
+            CardNumber.EnableClientScript = true;
         }
 
         public void SetUpOrderPageValidationSummary(ValidationSummary orderPageValidationSummary)
@@ -101,14 +74,13 @@ namespace emovies.website
             orderPageValidationSummary.ShowSummary = true;
         }
 
-
         protected void SubmitOrderClicked(object sender, EventArgs e)
         {
             Session["Name"] = Name.Text;
             Session["Email"] = Email.Text;
             Session["CardNumber"] = CardNumber.Text;
             Session["CardType"] = CardType.Text;
-            Session["FuturePromotions"] = Convert.ToInt32(FuturePromotions.Checked);
+            Session["FuturePromotions"] = (FuturePromotions.Checked == true) ? "Yes" : "No";
             Response.Redirect("confirmation.aspx");
         }
     }

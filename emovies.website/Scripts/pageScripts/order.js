@@ -1,5 +1,5 @@
 ﻿var checkBox = document.querySelector(".form-row__checkbox");
-var checkLabel = document.querySelector(".form-row__checklabel");
+var checkLabel = document.querySelector(".form-row__check-image");
 
 var checkboxState = 0;
 
