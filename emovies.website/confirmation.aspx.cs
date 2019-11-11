@@ -12,66 +12,72 @@ namespace emovies.website
 {
     public partial class Confirmation : Page
     {
-        public static CustomerInformation VisitorInformation;
+        public static Customer VisitorInformation;
         public static List<MovieOrder> Orders;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                Setup_Confirmation_Page_On_First_Load();
+                SetupConfirmationPageOnFirstLoad();
+                TransferDataToDatabase();
             }
         }
 
-        public void Setup_Confirmation_Page_On_First_Load()
+        public void SetupConfirmationPageOnFirstLoad()
         {
-            Set_Page_Culture_To_British();
-            Set_Page_Member_Variables();
-            Populate_Page_With_Order_Data();
+            SetPageCultureToBritish();
+            SetPageMemberVariables();
+            PopulatePageWithOrderData();
         }
 
-        public static void Set_Page_Culture_To_British()
+        public static void SetPageCultureToBritish()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
         }
 
-        public void Set_Page_Member_Variables()
+        public void SetPageMemberVariables()
         {
-            VisitorInformation = new CustomerInformation(Session);
             Orders = (List<MovieOrder>)Session["Orders"];
         }
 
-        public void Populate_Page_With_Order_Data()
+        public void PopulatePageWithOrderData()
         {
-            Load_Customer_Information_Into_Page();
-            Load_Order_Table_Into_Page();
+            LoadCustomerInformationIntoPage();
+            LoadOrderTableIntoPage();
         }
 
-        public void Load_Customer_Information_Into_Page()
+        public void LoadCustomerInformationIntoPage()
         {
-            CustomerName.Text = VisitorInformation.Name;
-            CustomerEmail.Text = VisitorInformation.Email;
-            CustomerCardNumber.Text = VisitorInformation.CardNumberStarred;
-            CustomerCardType.Text = VisitorInformation.CardType;
-            CustomerFuturePromotions.Text = VisitorInformation.FuturePromotions;
+            CustomerName.Text = (string)Session["Name"];
+            CustomerEmail.Text = (string)Session["Email"];
+            CustomerCardNumber.Text = (string)Session["CardNumber"];
+            CustomerCardType.Text = (string)Session["CardType"];
+            CustomerFuturePromotions.Text = (string)Session["FuturePromotions"];
         }
 
-        public void Load_Order_Table_Into_Page()
+        public void LoadOrderTableIntoPage()
         {
-            Load_Orders_Into_Order_Table();
-            Load_Order_Total_Into_Order_Table();
+            LoadOrdersIntoOrderTable();
+            LoadOrderTotalIntoOrderTable();
         }
 
-        public void Load_Orders_Into_Order_Table()
+        public void LoadOrdersIntoOrderTable()
         {
             RepeaterConfirmation.DataSource = Orders;
             RepeaterConfirmation.DataBind();
         }
 
-        public void Load_Order_Total_Into_Order_Table()
+        public void LoadOrderTotalIntoOrderTable()
         {
             decimal total = Orders.Total();
             TotalValue.Text = string.Format("{0:c}", total);
+        }
+
+        private void TransferDataToDatabase()
+        {
+            DataStagedForDBWrite dataStagedForDBWrite = DataStager.StageData(Session);
+            DBWriter.WriteToDB(dataStagedForDBWrite);
         }
     }
 }

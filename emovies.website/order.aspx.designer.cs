@@ -15,6 +15,33 @@ namespace emovies.website
     {
 
         /// <summary>
+        /// Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::emovies.website.Controls.UserTextInputControl Name;
+
+        /// <summary>
+        /// Email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::emovies.website.Controls.UserTextInputControl Email;
+
+        /// <summary>
+        /// CardNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::emovies.website.Controls.UserTextInputControl CardNumber;
+
+        /// <summary>
         /// CardType control.
         /// </summary>
         /// <remarks>
@@ -33,13 +60,13 @@ namespace emovies.website
         protected global::System.Web.UI.WebControls.CheckBox FuturePromotions;
 
         /// <summary>
-        /// CheckLabel control.
+        /// CheckImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CheckLabel;
+        protected global::System.Web.UI.WebControls.Label CheckImage;
 
         /// <summary>
         /// OrderPageValidationSummary control.

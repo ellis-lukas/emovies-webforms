@@ -8,17 +8,18 @@ namespace emovies.website.Data
 {
     public class MovieOrder
     {
-
-        public int Id { get; set; }
+        public int OrderId { get; set; }
 
         public int MovieId { get; set; }
 
+        public decimal Price { get; set; }
+
         public int Quantity { get; set; }
 
-        public Movie GetMovie()
+        public decimal MovieOrderTotal()
         {
-            Movie GotMovie = Default.CurrentMovies[this.MovieId - 1];
-            return GotMovie;
+            Movie movieInOrder = new MovieRepository().GetMovies[MovieId-1];
+            return Quantity * movieInOrder.Price;
         }
     }
 }

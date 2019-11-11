@@ -155,9 +155,23 @@
     <Compile Include="Controls\UserTextInputControl.ascx.designer.cs">
       <DependentUpon>UserTextInputControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Data\CustomerInformationMapper.cs" />
+    <Compile Include="Data\CustomerCommandParameterAdder.cs" />
+    <Compile Include="Data\CustomerOrderWriter.cs" />
+    <Compile Include="Data\CustomerWriter.cs" />
+    <Compile Include="Data\DataStager.cs" />
+    <Compile Include="Data\DBWriter.cs" />
+    <Compile Include="Data\DataStagedForDBWrite.cs" />
+    <Compile Include="Data\CollectionToListMapper.cs" />
+    <Compile Include="Data\CustomerMapper.cs" />
+    <Compile Include="Data\CustomerOrderMapper.cs" />
+    <Compile Include="Data\ListMoviesOrderedMapper.cs" />
+    <Compile Include="Data\ListOfMoviesOrderedGenerator.cs" />
+    <Compile Include="Data\MovieOrderMapper.cs" />
+    <Compile Include="Data\CustomerOrder.cs" />
+    <Compile Include="Data\MovieOrderWriter.cs" />
+    <Compile Include="Data\OrderCommandParameterAdder.cs" />
     <Compile Include="Data\ProtectedCardNumber.cs" />
-    <Compile Include="Data\CustomerInformation.cs" />
+    <Compile Include="Data\Customer.cs" />
     <Compile Include="Data\Movie.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="confirmation.aspx.cs">

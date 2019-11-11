@@ -1,0 +1,16 @@
+CREATE PROCEDURE AddNewCustomer
+(
+	@Name				nvarchar(100),
+	@Email				nvarchar(254),
+	@CreditCardNumber	nvarchar(19),
+	@CreditCardType		nvarchar(100),
+	@FuturePromotions	bit,
+	@DateCreated		datetime
+) AS
+
+-- INSERT the new record
+INSERT INTO [dbo].[Customer] (Name, Email, CreditCardNumber, CreditCardType, Promotions, DateCreated)
+VALUES(@Name, @Email, @CreditCardNumber, @CreditCardType, @DateCreated)
+
+-- Now return the InventoryID of the newly inserted record
+RETURN SCOPE_IDENTITY()
