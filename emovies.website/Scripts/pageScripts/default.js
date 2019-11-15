@@ -1,5 +1,5 @@
 ﻿const updateButton = document.querySelector(".update__button");
-const orderButton = document.querySelector(".order__button")
+const orderButton = document.querySelector(".order__button");
 const totalValueCell = document.querySelector(".total__cell--value");
 const movieList = document.querySelectorAll(".table-row");
 
@@ -21,9 +21,12 @@ function updateTotal() {
 
 function calculateTotal() {
     var total = 0.0;
-    movieList.forEach((movie) => {
-        total += individualMovieTotal(movie);
-    });
+    movieList.forEach
+    ((movie)
+        =>  {
+            total += individualMovieTotal(movie);
+        }
+    );
     return total;
 }
 
@@ -96,7 +99,6 @@ function ValidateSelectionUpdated(sender, args) {
         args.IsValid = false;
     }
 }
-
 
 function arraysAreEqual(arrayA, arrayB) {
     return (JSON.stringify(arrayA) === JSON.stringify(arrayB));

@@ -6,15 +6,15 @@ using System.Web.SessionState;
 
 namespace emovies.website.Data
 {
-    public static class DataStager
+    public class DataStager
     {
-        public static DataStagedForDBWrite StageData(HttpSessionState sessionState)
+        public DataStagedForDBWrite StageData(HttpSessionState sessionState)
         {
             return new DataStagedForDBWrite
             {
-                CustomerData = CustomerMapper.MapFromSession(sessionState),
-                CustomerOrderData = CustomerOrderMapper.MapFromSession(sessionState),
-                MovieOrders = ListOfMoviesOrderedMapper.MapFromSession(sessionState)
+                CustomerData = new CustomerMapper().MapFromSession(sessionState),
+                CustomerOrderData = new CustomerOrderMapper().MapFromSession(sessionState),
+                MovieOrders = new ListOfOrderLineMapper().MapFromSession(sessionState)
             };
         }
     }

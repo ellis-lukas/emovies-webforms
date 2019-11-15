@@ -34,8 +34,8 @@
             <asp:Repeater ID="RepeaterConfirmation" runat="server">
                 <ItemTemplate>
                     <div class="summary-row">
-                        <div class="summary-row__cell summary-row__cell--movie"></div>
-                        <div class="summary-row__cell summary-row__cell--order"></div>
+                        <div class="summary-row__cell summary-row__cell--movie"><%#Eval("Name")%></div>
+                        <div class="summary-row__cell summary-row__cell--order"><%# Eval("Quantity") + " x " + Eval("Price", "{0:c}") %></div>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>

@@ -12,6 +12,6 @@ namespace emovies.website.Data
 
         public CustomerOrder CustomerOrderData;
 
-        public List<MovieOrder> MovieOrders;
+        public List<OrderLine> MovieOrders;
     }
 }

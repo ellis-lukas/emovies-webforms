@@ -39,8 +39,8 @@ namespace emovies.website
 
         public void SetUpNameValidation()
         {
-            Name.RequiredFieldDisplay = ValidatorDisplay.None;
-            Name.RegularExpressionDisplay = ValidatorDisplay.None;
+            Name.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
+            Name.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
             Name.ErrorMsgForRequiredField = "Name is required";
             Name.ErrorMsgForRegularExpression = "Invalid name entered";
             Name.ValidationExpression = @"\s*[\w]+(\.){0,1}((\s+[\w]+(-){0,1}[\w]+)|(\s+[\w]+))*\s*";
@@ -49,18 +49,20 @@ namespace emovies.website
 
         public void SetUpEmailValidation()
         {
-            Email.RequiredFieldDisplay = ValidatorDisplay.None;
-            Email.RegularExpressionDisplay = ValidatorDisplay.None;
+            Email.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
+            Email.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
+            Email.RequiredFieldText = "emailaddressneeeded";
             Email.ErrorMsgForRequiredField = "Email address is required";
             Email.ErrorMsgForRegularExpression = "Invalid email address entered";
             Email.ValidationExpression = @"\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\s*";
+            
             Email.EnableClientScript = true;
         }
 
         public void SetUpCardNumberValidation()
         {
-            CardNumber.RequiredFieldDisplay = ValidatorDisplay.None;
-            CardNumber.RegularExpressionDisplay = ValidatorDisplay.None;
+            CardNumber.RequiredFieldDisplay = ValidatorDisplay.Static;
+            CardNumber.RegularExpressionDisplay = ValidatorDisplay.Static;
             CardNumber.ErrorMsgForRequiredField = "Card number required";
             CardNumber.ErrorMsgForRegularExpression = "Invalid card number entered";
             CardNumber.ValidationExpression = @"\s*([0-9]\s*){15,19}";
@@ -76,12 +78,27 @@ namespace emovies.website
 
         protected void SubmitOrderClicked(object sender, EventArgs e)
         {
-            Session["Name"] = Name.Text;
-            Session["Email"] = Email.Text;
-            Session["CardNumber"] = CardNumber.Text;
-            Session["CardType"] = CardType.Text;
-            Session["FuturePromotions"] = (FuturePromotions.Checked == true) ? "Yes" : "No";
+            SaveCustomerInfoToSession();
+            SubmitDataToDatabase();
             Response.Redirect("confirmation.aspx");
+        }
+
+        private void SaveCustomerInfoToSession()
+        {
+            Session["CustomerInfo"] = new Customer
+            {
+                Name = Name.Text,
+                Email = Email.Text,
+                CardNumber = CardNumber.Text,
+                CardType = CardType.Text,
+                FuturePromotions = FuturePromotions.Checked
+            };
+        }
+
+        private void SubmitDataToDatabase()
+        {
+            DataStagedForDBWrite dataStagedForDBWrite = new DataStager().StageData(Session);
+            new DBWriter().WriteToDB(dataStagedForDBWrite);
         }
     }
 }

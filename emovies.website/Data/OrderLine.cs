@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace emovies.website.Data
 {
-    public class MovieOrder
+    public class OrderLine
     {
         public int OrderId { get; set; }
 
@@ -16,10 +16,5 @@ namespace emovies.website.Data
 
         public int Quantity { get; set; }
 
-        public decimal MovieOrderTotal()
-        {
-            Movie movieInOrder = new MovieRepository().GetMovies[MovieId-1];
-            return Quantity * movieInOrder.Price;
-        }
     }
 }
