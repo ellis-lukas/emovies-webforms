@@ -12,11 +12,12 @@ namespace emovies.website
 {
     public partial class Default : Page
     {
-        public List<Movie> CurrentMovies { get
-            { return new MovieRepository().GetMovies(); }
+        private readonly IMovieRepository MovieRepository = new MovieDatabaseRepository();
+        private List<Movie> CurrentMovies { get
+            { return MovieRepository.GetMovies(); }
         }
 
-        public List<Movie> CurrentMoviesInRenderOrder { get 
+        private List<Movie> CurrentMoviesInRenderOrder { get 
             { return CurrentMovies; }
         }
 
@@ -97,7 +98,7 @@ namespace emovies.website
         {
             RepeaterItemCollection returnedMovieTable = RepeaterBrowse.Items;
             List<int> quantityList = new QuantityReader(returnedMovieTable).GetQuantityList();
-            List<MovieOrder> moviesOrdered = new ListOfMovieOrderGenerator(quantityList, CurrentMoviesInRenderOrder).GenerateMovieOrders();
+            List<OrderLine> moviesOrdered = new ListOfOrderLineGenerator(quantityList, CurrentMoviesInRenderOrder).GenerateMovieOrders();
             Session["MoviesOrdered"] = moviesOrdered;
         }
     }

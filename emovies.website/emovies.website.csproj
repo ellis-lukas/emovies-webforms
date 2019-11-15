@@ -156,15 +156,19 @@
       <DependentUpon>UserTextInputControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Data\DataStager.cs" />
+    <Compile Include="Data\DBReader.cs" />
     <Compile Include="Data\DBWriter.cs" />
     <Compile Include="Data\DataStagedForDBWrite.cs" />
     <Compile Include="Data\CustomerMapper.cs" />
     <Compile Include="Data\CustomerOrderMapper.cs" />
-    <Compile Include="Data\ListMoviesOrderedMapper.cs" />
-    <Compile Include="Data\ListOfMovieOrderGenerator.cs" />
+    <Compile Include="Data\DisplayCustomer.cs" />
+    <Compile Include="Data\DisplayCustomerMapper.cs" />
+    <Compile Include="Data\DisplayOrderLineMapper.cs" />
+    <Compile Include="Data\ListOfOrderLineMapper.cs" />
+    <Compile Include="Data\ListOfOrderLineGenerator.cs" />
     <Compile Include="Data\CustomerOrder.cs" />
-    <Compile Include="Data\PresentationOrderLine.cs" />
-    <Compile Include="Data\ProtectedCardNumber.cs" />
+    <Compile Include="Data\ListOfDisplayOrderLineMapper.cs" />
+    <Compile Include="Data\DisplayOrderLine.cs" />
     <Compile Include="Data\Customer.cs" />
     <Compile Include="Data\Movie.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -176,9 +180,9 @@
       <DependentUpon>confirmation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\MovieRepository.cs" />
-    <Compile Include="Data\ListExtensions.cs" />
-    <Compile Include="Data\MovieOrder.cs" />
+    <Compile Include="Data\OrderLine.cs" />
     <Compile Include="Data\QuantityReader.cs" />
+    <Compile Include="Data\TotalMapper.cs" />
     <Compile Include="order.aspx.cs">
       <DependentUpon>order.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

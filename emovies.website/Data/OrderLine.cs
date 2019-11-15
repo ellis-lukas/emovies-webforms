@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace emovies.website.Data
 {
-    public class MovieOrder
+    public class OrderLine
     {
         public int OrderId { get; set; }
 
@@ -15,5 +15,6 @@ namespace emovies.website.Data
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
+
     }
 }

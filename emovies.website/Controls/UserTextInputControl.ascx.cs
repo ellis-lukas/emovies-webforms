@@ -26,6 +26,15 @@ namespace emovies.website.Controls
             set { TextInput.MaxLength = value; }
         }
 
+        public string RequiredFieldText {
+            set { RequiredFieldValidator.Text = value; }
+        }
+
+        public string RegularExpressionText
+        {
+            set { RegularExpressionValidator.Text = value; }
+        }
+
         public ValidatorDisplay RequiredFieldDisplay
         {
             set { RequiredFieldValidator.Display = value; }

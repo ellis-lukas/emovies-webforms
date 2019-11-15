@@ -12,12 +12,17 @@ namespace emovies.website
 {
     public partial class Confirmation : Page
     {
-        public static List<MovieOrder> Orders;
+        private List<OrderLine> Orders;
+        protected List<DisplayOrderLine> DisplayOrders;
+        private Customer Customer;
+        private DisplayCustomer DisplayCustomer;
+        private readonly IMovieRepository MovieRepository = new MovieDatabaseRepository();
+        private decimal Total;
 
-        public List<Movie> CurrentMovies
+        protected List<Movie> CurrentMovies
         {
             get
-            { return new MovieRepository().GetMovies(); }
+            { return MovieRepository.GetMovies(); }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -25,25 +30,38 @@ namespace emovies.website
             if (!Page.IsPostBack)
             {
                 SetupConfirmationPageOnFirstLoad();
-                TransferDataToDatabase();
             }
         }
 
-        public void SetupConfirmationPageOnFirstLoad()
+        private void SetupConfirmationPageOnFirstLoad()
         {
             SetPageCultureToBritish();
             SetPageMemberVariables();
             PopulatePageWithOrderData();
         }
 
-        public static void SetPageCultureToBritish()
+        private static void SetPageCultureToBritish()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
         }
 
         public void SetPageMemberVariables()
         {
-            Orders = (List<MovieOrder>)Session["MoviesOrdered"];
+            SetPageMemberBusinessVariables();
+            SetPageMemberDisplayVariables();
+        }
+
+        public void SetPageMemberBusinessVariables()
+        {
+            Orders = (List<OrderLine>)Session["MoviesOrdered"];
+            Customer = (Customer)Session["CustomerInfo"];
+        }
+
+        public void SetPageMemberDisplayVariables()
+        {
+            DisplayOrders = new ListOfDisplayOrderLineMapper().MapFromListOfOrderLine(Orders);
+            DisplayCustomer = new DisplayCustomerMapper().MapFromCustomer(Customer);
+            Total = new TotalMapper().MapTotal(DisplayOrders);
         }
 
         public void PopulatePageWithOrderData()
@@ -54,35 +72,28 @@ namespace emovies.website
 
         public void LoadCustomerInformationIntoPage()
         {
-            CustomerName.Text = (string)Session["Name"];
-            CustomerEmail.Text = (string)Session["Email"];
-            CustomerCardNumber.Text = (string)Session["CardNumber"];
-            CustomerCardType.Text = (string)Session["CardType"];
-            CustomerFuturePromotions.Text = ((bool)Session["FuturePromotions"] == true) ? "Yes" : "No";
+            CustomerName.Text = DisplayCustomer.Name;
+            CustomerEmail.Text = DisplayCustomer.Email;
+            CustomerCardNumber.Text = DisplayCustomer.ProtectedCardNumber;
+            CustomerCardType.Text = DisplayCustomer.CardType;
+            CustomerFuturePromotions.Text = (DisplayCustomer.FuturePromotions == true) ? "Yes" : "No";
         }
 
         public void LoadOrderTableIntoPage()
         {
-            LoadOrdersIntoOrderTable();
-            LoadOrderTotalIntoOrderTable();
+            LoadDisplayOrdersIntoOrderTable();
+            LoadTotalIntoOrderTable();
         }
 
-        public void LoadOrdersIntoOrderTable()
+        public void LoadDisplayOrdersIntoOrderTable()
         {
-            RepeaterConfirmation.DataSource = Orders;
+            RepeaterConfirmation.DataSource = DisplayOrders;
             RepeaterConfirmation.DataBind();
         }
 
-        public void LoadOrderTotalIntoOrderTable()
+        public void LoadTotalIntoOrderTable()
         {
-            decimal total = Orders.Total();
-            TotalValue.Text = string.Format("{0:c}", total);
-        }
-
-        private void TransferDataToDatabase()
-        {
-            DataStagedForDBWrite dataStagedForDBWrite = DataStager.StageData(Session);
-            DBWriter.WriteToDB(dataStagedForDBWrite);
+            TotalValue.Text = string.Format("{0:c}", Total);
         }
     }
 }

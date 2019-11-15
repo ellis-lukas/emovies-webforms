@@ -30,7 +30,7 @@ namespace emovies.website.Data
     {
         public List<Movie> GetMovies()
         {
-            throw new NotImplementedException();
+            return new DBReader().GetMovies();
         }
     }
 }

@@ -41,14 +41,6 @@ input {
 
 select {
     outline: none;
-    /*
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    background: url("Images2/diamond.png");
-    background-repeat: no-repeat;
-    background-position: right 0px;*/
 }
 
 .container {
@@ -358,4 +350,15 @@ select {
 
 .total__cell--value-summary {
     text-align: right;
+}
+
+.validated-input-container {
+    position: relative;
+}
+
+.form-row__validator {
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    font-size: 10px;
 }

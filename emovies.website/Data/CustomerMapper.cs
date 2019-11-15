@@ -2,18 +2,12 @@
 
 namespace emovies.website.Data
 {
-    public static class CustomerMapper
+    public class CustomerMapper
     {
-        public static Customer MapFromSession(HttpSessionState sessionState)
+        public Customer MapFromSession(HttpSessionState sessionState)
         {
-            return new Customer
-            {
-                Name = (string)sessionState["Name"],
-                Email = (string)sessionState["Email"],
-                CardNumber = (string)sessionState["CardNumber"],
-                CardType = (string)sessionState["CardType"],
-                FuturePromotions = (bool)sessionState["FuturePromotions"]
-            };
+            Customer mappedCustomer = (Customer)sessionState["CustomerInfo"];
+            return mappedCustomer;
         }
     }
 }

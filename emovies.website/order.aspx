@@ -4,13 +4,13 @@
     <h1>Order</h1>
     <div class="info info--order">
         <div class="form">
-            <div class="form-row form-row--upper">
+            <div class="form-row form-row--name form-row--upper">
                 <ValidatedInput:Text ID="Name" LabelText="Name" runat="server" />
             </div>
-            <div class="form-row form-row--upper">
+            <div class="form-row form-row--email form-row--upper">
                 <ValidatedInput:Text ID="Email" LabelText="Email" EnableClientScript="true" runat="server" />
             </div>
-            <div class="form-row form-row--upper">
+            <div class="form-row form-row--card-number form-row--upper">
                 <ValidatedInput:Text ID="CardNumber" LabelText="Credit card number" EnableClientScript="true" runat="server" />
             </div>
             <div class="form-row form-row--lower">
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="order order--submit-order">
-        <asp:Button CssClass="order__button" Text="Submit order >>" type="submit" OnClick="SubmitOrderClicked" runat="server" />
+        <asp:Button CssClass="order__button" Text="Submit order >>" type="submit" runat="server" />
     </div>
     <asp:ValidationSummary ID="OrderPageValidationSummary" runat="server" DisplayMode="BulletList" ShowMessageBox="true" ShowSummary="false" HeaderText="Details Validation Issue" EnableClientScript="True" />
     <script type="text/javascript" src="Scripts/pageScripts/order.js"></script>

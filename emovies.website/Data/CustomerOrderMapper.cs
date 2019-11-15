@@ -6,13 +6,15 @@ using System.Web.SessionState;
 
 namespace emovies.website.Data
 {
-    public static class CustomerOrderMapper
+    public class CustomerOrderMapper
     {
-        public static CustomerOrder MapFromSession(HttpSessionState sessionState)
+        public CustomerOrder MapFromSession(HttpSessionState sessionState)
         {
+            List<OrderLine> moviesOrdered = (List<OrderLine>)sessionState["MoviesOrdered"];
+            decimal orderTotal = new TotalMapper().MapTotal(moviesOrdered);
             return new CustomerOrder
             {
-                Total = ((List<MovieOrder>)sessionState["MoviesOrdered"]).Total()
+                Total = orderTotal
             };
         }
     }

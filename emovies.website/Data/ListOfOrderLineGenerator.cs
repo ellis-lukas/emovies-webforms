@@ -6,29 +6,29 @@ using System.Web.UI.WebControls;
 
 namespace emovies.website.Data
 {
-    public class ListOfMovieOrderGenerator
+    public class ListOfOrderLineGenerator
     {
         private List<int> QuantityList;
 
         private List<Movie> CurrentMoviesInRenderedOrder;
 
-        public ListOfMovieOrderGenerator(List<int> quantityList, List<Movie> currentMoviesInRenderedOrder)
+        public ListOfOrderLineGenerator(List<int> quantityList, List<Movie> currentMoviesInRenderedOrder)
         {
             QuantityList = quantityList;
             CurrentMoviesInRenderedOrder = currentMoviesInRenderedOrder;
         }
 
-        public List<MovieOrder> GenerateMovieOrders()
+        public List<OrderLine> GenerateMovieOrders()
         {
             return ExtractNonZeroOrders(LinkDataToCreateListTypeMovieOrder());
         }
 
-        public List<MovieOrder> LinkDataToCreateListTypeMovieOrder()
+        public List<OrderLine> LinkDataToCreateListTypeMovieOrder()
         {
-            List<MovieOrder> MoviesOrdered = new List<MovieOrder>();
+            List<OrderLine> MoviesOrdered = new List<OrderLine>();
             for (int i = 0; i < CurrentMoviesInRenderedOrder.Count; i++)
             {
-                MoviesOrdered.Add(new MovieOrder
+                MoviesOrdered.Add(new OrderLine
                 {
                     MovieId = CurrentMoviesInRenderedOrder[i].Id,
                     Price = CurrentMoviesInRenderedOrder[i].Price,
@@ -38,10 +38,10 @@ namespace emovies.website.Data
             return MoviesOrdered;
         }
 
-        private List<MovieOrder> ExtractNonZeroOrders (List<MovieOrder> movieOrdersZeroQuantInc)
+        private List<OrderLine> ExtractNonZeroOrders (List<OrderLine> movieOrdersZeroQuantInc)
         {
-            List<MovieOrder> nonZeroMovieOrders = new List<MovieOrder>();
-            foreach (MovieOrder movieOrder in movieOrdersZeroQuantInc)
+            List<OrderLine> nonZeroMovieOrders = new List<OrderLine>();
+            foreach (OrderLine movieOrder in movieOrdersZeroQuantInc)
             {
                 if (movieOrder.Quantity > 0)
                 {
