@@ -6,27 +6,37 @@
         <div class="form">
             <h2>Your details</h2>
             <div class="form-row form-row--upper">
-                <div class="form-row__cell form-row__cell--label">Name</div>
-                <asp:Label ID="CustomerName" CssClass="form-row__cell form-row__cell--output" runat="server" />
-            </div>
-            <div class="form-row form-row--upper">
-                <div class="form-row__cell form-row__cell--label">Email</div>
-                <asp:Label ID="CustomerEmail" CssClass="form-row__cell form-row__cell--output" runat="server" />
-            </div>
-            <div class="form-row form-row--upper">
-                <div class="form-row__cell form-row__cell--label">Credit card number</div>
-                <asp:Label ID="CustomerCardNumber" CssClass="form-row__cell form-row__cell--output" runat="server" />
-            </div>
-            <div class="form-row form-row--lower">
-                <div class="form-row__cell form-row__cell--label">Credit card type</div>
-                <asp:Label ID="CustomerCardType" CssClass="form-row__cell form-row__cell--output" runat="server" />
-            </div>
-            <div class="form-row form-row--lower">
-                <div class="form-row__cell form-row__cell--label form-row__cell--shifted">
-                    Please email me<br>
-                    future promotions
+                <div class="form-row__label-input-container">
+                    <div class="form-row__cell form-row__cell--label">Name</div>
+                    <asp:Label ID="CustomerName" CssClass="form-row__cell form-row__cell--output" runat="server" />
                 </div>
-                <asp:Label ID="CustomerFuturePromotions" CssClass="form-row__cell form-row__cell--output" runat="server" />
+            </div>
+            <div class="form-row form-row--upper">
+                <div class="form-row__label-input-container">
+                    <div class="form-row__cell form-row__cell--label">Email</div>
+                    <asp:Label ID="CustomerEmail" CssClass="form-row__cell form-row__cell--output" runat="server" />
+                </div>
+            </div>
+            <div class="form-row form-row--upper">
+                <div class="form-row__label-input-container">
+                    <div class="form-row__cell form-row__cell--label">Credit card number</div>
+                    <asp:Label ID="CustomerCardNumber" CssClass="form-row__cell form-row__cell--output" runat="server" />
+                </div>
+            </div>
+            <div class="form-row form-row--lower">
+                <div class="form-row__label-input-container">
+                    <div class="form-row__cell form-row__cell--label">Credit card type</div>
+                    <asp:Label ID="CustomerCardType" CssClass="form-row__cell form-row__cell--output" runat="server" />
+                </div>
+            </div>
+            <div class="form-row form-row--lower">
+                <div class="form-row__label-input-container">
+                    <div class="form-row__cell form-row__cell--label form-row__cell--shifted">
+                        Please email me<br>
+                        future promotions
+                    </div>
+                    <asp:Label ID="CustomerFuturePromotions" CssClass="form-row__cell form-row__cell--output" runat="server" />
+                </div>
             </div>
         </div>
         <div class="summary">

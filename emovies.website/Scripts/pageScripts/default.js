@@ -22,11 +22,7 @@ function updateTotal() {
 function calculateTotal() {
     var total = 0.0;
     movieList.forEach
-    ((movie)
-        =>  {
-            total += individualMovieTotal(movie);
-        }
-    );
+    ((movie) =>  {total += individualMovieTotal(movie); });
     return total;
 }
 

@@ -201,7 +201,7 @@ select {
 }
 
 .form-row {
-    height: 32px;
+
 }
 
 .form-row--upper {
@@ -209,8 +209,13 @@ select {
 }
 
 .form-row--lower {
+    height: 32px;
     margin-top: 24px;
     margin-bottom: 16px;
+}
+
+.form-row__label-input-container {
+    height: 32px;
 }
 
 .form-row__cell {
@@ -352,13 +357,34 @@ select {
     text-align: right;
 }
 
-.validated-input-container {
+.form-row__label-input-pair {
+    height: 32px;
+}
+
+.form-row__validators-container {
     position: relative;
+    left: 290px;
 }
 
 .form-row__validator {
-    position: absolute;
-    left: 300px;
-    top: 0px;
-    font-size: 10px;
+    font-size: 17px;
+    color: red;
 }
+
+.invalid-required {
+    border-color: red;
+}
+
+.invalid-regular-expression {
+    border-color: red;
+}
+
+/*These are used for adding classes to invalid fields, we don't need to see them!*/
+.required-extender {
+    display: none;
+}
+
+.regular-expression-extender {
+    display: none;
+}
+
