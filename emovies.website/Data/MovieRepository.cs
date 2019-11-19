@@ -13,12 +13,23 @@ namespace emovies.website.Data
 
         private static MovieRepository _instance;
 
+        private static readonly object _lock = new object();
+
         public static MovieRepository GetInstance()
         {
             if(_instance == null)
             {
-                _instance = new MovieRepository();
-                _instance.Movies = new DBReader().GetMovies();
+                lock(_lock)
+                {
+                    if(_instance == null)
+                    {
+                        _instance = new MovieRepository
+                        {
+                            Movies = new DBReader().GetMovies()
+                        };
+                    }
+                }
+
             }
             return _instance;
         }
