@@ -15,13 +15,13 @@ namespace emovies.website
     {
 
         /// <summary>
-        /// RepeaterBrowse control.
+        /// BrowsePageRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RepeaterBrowse;
+        protected global::System.Web.UI.WebControls.Repeater BrowsePageRepeater;
 
         /// <summary>
         /// NonZeroValidator control.

@@ -8,10 +8,10 @@
                 <ValidatedInput:Text ID="Name" LabelText="Name" runat="server" />
             </div>
             <div class="form-row form-row--upper">
-                <ValidatedInput:Text ID="Email" LabelText="Email" EnableClientScript="true" runat="server" />
+                <ValidatedInput:Text ID="Email" LabelText="Email" runat="server" />
             </div>
             <div class="form-row form-row--upper">
-                <ValidatedInput:Text ID="CardNumber" LabelText="Credit card number" EnableClientScript="true" runat="server" />
+                <ValidatedInput:Text ID="CardNumber" LabelText="Credit card number" runat="server" />
             </div>
             <div class="form-row form-row--lower">
                 <div class="form-row__label-input-container">

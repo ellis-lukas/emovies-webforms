@@ -34,7 +34,7 @@ function individualMovieTotal(movie) {
 }
 
 function priceCellValue(movie) {
-    var priceCell = movie.querySelector(".table-row__price-bucket");
+    var priceCell = movie.querySelector(".table-row__price-currencyless");
     var priceCellValue = parseFloat(priceCell.value);
     return priceCellValue;
 }
