@@ -12,9 +12,9 @@ namespace emovies.website
 {
     public partial class Default : Page
     {
-        private readonly IMovieRepository MovieRepository = new MovieDatabaseRepository();
+        private readonly MovieRepository movieRepository = MovieRepository.GetInstance();
         private List<Movie> CurrentMovies { get
-            { return MovieRepository.GetMovies(); }
+            { return movieRepository.GetMovies(); }
         }
 
         private List<Movie> CurrentMoviesInRenderOrder { get 
