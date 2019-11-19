@@ -16,13 +16,13 @@ namespace emovies.website
         protected List<DisplayOrderLine> DisplayOrders;
         private Customer CustomerInfo;
         private DisplayCustomer DisplayCustomerInfo;
-        private readonly IMovieRepository MovieRepository = new MovieDatabaseRepository();
+        private readonly MovieRepository movieRepository = MovieRepository.GetInstance();
         private decimal Total;
 
         protected List<Movie> CurrentMovies
         {
             get
-            { return MovieRepository.GetMovies(); }
+            { return movieRepository.GetMovies(); }
         }
 
         protected void Page_Load(object sender, EventArgs e)

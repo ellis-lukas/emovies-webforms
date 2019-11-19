@@ -27,7 +27,7 @@ namespace emovies.website.Data
 
         private Movie GetMovie(int requestedMovieID)
         {
-            IMovieRepository movieRepository = new MovieDatabaseRepository();
+            MovieRepository movieRepository = MovieRepository.GetInstance();
             List<Movie> currentMovies = movieRepository.GetMovies();
             Movie requestedMovie = currentMovies.Find(movie => movie.Id == requestedMovieID);
             return requestedMovie;

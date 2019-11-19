@@ -6,31 +6,28 @@ using System.Web.SessionState;
 
 namespace emovies.website.Data
 {
-    public interface IMovieRepository
-    {
-        List<Movie> GetMovies();
-    }
 
-    public class MovieRepository : IMovieRepository
+    public class MovieRepository
     {
-        public List<Movie> GetMovies()
+        private MovieRepository() { }
+
+        private static MovieRepository _instance;
+
+        public static MovieRepository GetInstance()
         {
-            return new List<Movie>
+            if(_instance == null)
             {
-            new Movie {Id=1, Name="Movie 1", Price=4.99m},
-            new Movie {Id=2, Name="Movie 2", Price=5.50m},
-            new Movie {Id=3, Name="Movie 3", Price=5.50m},
-            new Movie {Id=4, Name="Movie 4", Price=6.50m},
-            new Movie {Id=5, Name="Movie 5", Price=7.50m},
-            };
+                _instance = new MovieRepository();
+                _instance.Movies = new DBReader().GetMovies();
+            }
+            return _instance;
         }
-    }
 
-    public class MovieDatabaseRepository : IMovieRepository
-    {
+        private List<Movie> Movies;
+
         public List<Movie> GetMovies()
         {
-            return new DBReader().GetMovies();
+            return Movies;
         }
     }
 }
