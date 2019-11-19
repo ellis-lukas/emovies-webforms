@@ -27,7 +27,6 @@ namespace emovies.website
         public void SetUpOrderPageValidation()
         {
             SetUpOrderPageInputValidation();
-            SetUpOrderPageValidationSummary(OrderPageValidationSummary);
         }
 
         public void SetUpOrderPageInputValidation()
@@ -41,9 +40,9 @@ namespace emovies.website
         {
             Name.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
             Name.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
-            Name.ErrorMsgForRequiredField = "Name is required";
+            Name.ErrorMsgForRequiredField = "Name required";
             Name.ErrorMsgForRegularExpression = "Invalid name entered";
-            Name.ValidationExpression = @"\s*[\w]+(\.){0,1}((\s+[\w]+(-){0,1}[\w]+)|(\s+[\w]+))*\s*";
+            Name.ValidationExpression = @"\s*[a-zA-Z]+(\.){0,1}((\s+[a-zA-Z]+(-){0,1}[a-zA-Z]+)|(\s+[a-zA-Z]+))*\s*";
             Name.EnableClientScript = true;
         }
 
@@ -51,29 +50,21 @@ namespace emovies.website
         {
             Email.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
             Email.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
-            Email.RequiredFieldText = "emailaddressneeeded";
+            Email.RequiredFieldText = "Email address required";
             Email.ErrorMsgForRequiredField = "Email address is required";
             Email.ErrorMsgForRegularExpression = "Invalid email address entered";
             Email.ValidationExpression = @"\s*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\s*";
-            
             Email.EnableClientScript = true;
         }
 
         public void SetUpCardNumberValidation()
         {
-            CardNumber.RequiredFieldDisplay = ValidatorDisplay.Static;
-            CardNumber.RegularExpressionDisplay = ValidatorDisplay.Static;
+            CardNumber.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
+            CardNumber.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
             CardNumber.ErrorMsgForRequiredField = "Card number required";
             CardNumber.ErrorMsgForRegularExpression = "Invalid card number entered";
             CardNumber.ValidationExpression = @"\s*([0-9]\s*){15,19}";
             CardNumber.EnableClientScript = true;
-        }
-
-        public void SetUpOrderPageValidationSummary(ValidationSummary orderPageValidationSummary)
-        {
-            orderPageValidationSummary.DisplayMode = ValidationSummaryDisplayMode.BulletList;
-            orderPageValidationSummary.ShowMessageBox = false;
-            orderPageValidationSummary.ShowSummary = true;
         }
 
         protected void SubmitOrderClicked(object sender, EventArgs e)
@@ -85,7 +76,7 @@ namespace emovies.website
 
         private void SaveCustomerInfoToSession()
         {
-            Session["CustomerInfo"] = new Customer
+            Customer newCustomer = new Customer
             {
                 Name = Name.Text,
                 Email = Email.Text,
@@ -93,6 +84,7 @@ namespace emovies.website
                 CardType = CardType.Text,
                 FuturePromotions = FuturePromotions.Checked
             };
+            Session["CustomerInfo"] = newCustomer;
         }
 
         private void SubmitDataToDatabase()

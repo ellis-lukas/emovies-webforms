@@ -32,7 +32,7 @@ namespace emovies.website.Data
 
         private int GetQuantityFromRepeaterItem(RepeaterItem repeaterItem)
         {
-            TextBox quantityCell = (TextBox)repeaterItem.FindControl("quantity");
+            TextBox quantityCell = (TextBox)repeaterItem.FindControl("quantityCell");
             int quantity = int.Parse(quantityCell.Text);
             return quantity;
         }

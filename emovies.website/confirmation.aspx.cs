@@ -14,8 +14,8 @@ namespace emovies.website
     {
         private List<OrderLine> Orders;
         protected List<DisplayOrderLine> DisplayOrders;
-        private Customer Customer;
-        private DisplayCustomer DisplayCustomer;
+        private Customer CustomerInfo;
+        private DisplayCustomer DisplayCustomerInfo;
         private readonly IMovieRepository MovieRepository = new MovieDatabaseRepository();
         private decimal Total;
 
@@ -28,7 +28,7 @@ namespace emovies.website
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {
+            { 
                 SetupConfirmationPageOnFirstLoad();
             }
         }
@@ -53,14 +53,14 @@ namespace emovies.website
 
         public void SetPageMemberBusinessVariables()
         {
+            CustomerInfo = (Customer)Session["CustomerInfo"];
             Orders = (List<OrderLine>)Session["MoviesOrdered"];
-            Customer = (Customer)Session["CustomerInfo"];
         }
 
         public void SetPageMemberDisplayVariables()
         {
             DisplayOrders = new ListOfDisplayOrderLineMapper().MapFromListOfOrderLine(Orders);
-            DisplayCustomer = new DisplayCustomerMapper().MapFromCustomer(Customer);
+            DisplayCustomerInfo = new DisplayCustomerMapper().MapFromCustomer(CustomerInfo);
             Total = new TotalMapper().MapTotal(DisplayOrders);
         }
 
@@ -72,11 +72,11 @@ namespace emovies.website
 
         public void LoadCustomerInformationIntoPage()
         {
-            CustomerName.Text = DisplayCustomer.Name;
-            CustomerEmail.Text = DisplayCustomer.Email;
-            CustomerCardNumber.Text = DisplayCustomer.ProtectedCardNumber;
-            CustomerCardType.Text = DisplayCustomer.CardType;
-            CustomerFuturePromotions.Text = (DisplayCustomer.FuturePromotions == true) ? "Yes" : "No";
+            CustomerName.Text = DisplayCustomerInfo.Name;
+            CustomerEmail.Text = DisplayCustomerInfo.Email;
+            CustomerCardNumber.Text = DisplayCustomerInfo.ProtectedCardNumber;
+            CustomerCardType.Text = DisplayCustomerInfo.CardType;
+            CustomerFuturePromotions.Text = (CustomerInfo.FuturePromotions == true) ? "Yes" : "No";
         }
 
         public void LoadOrderTableIntoPage()

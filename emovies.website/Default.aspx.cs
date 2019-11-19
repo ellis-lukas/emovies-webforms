@@ -43,8 +43,8 @@ namespace emovies.website
 
         public void LoadMoviesIntoPage()
         {
-            RepeaterBrowse.DataSource = CurrentMoviesInRenderOrder;
-            RepeaterBrowse.DataBind();
+            BrowsePageRepeater.DataSource = CurrentMoviesInRenderOrder;
+            BrowsePageRepeater.DataBind();
         }
 
         public void SetUpBrowsePageValidation()
@@ -68,6 +68,7 @@ namespace emovies.website
         {
             nonZeroValidator.Display = ValidatorDisplay.None;
             nonZeroValidator.ErrorMessage = "No movies selected";
+            nonZeroValidator.EnableClientScript = true;
         }
 
         public void SetUpSelectionUpdatedValidation()
@@ -79,16 +80,18 @@ namespace emovies.website
         {
             selectionUpdatedValidator.Display = ValidatorDisplay.None;
             selectionUpdatedValidator.ErrorMessage = "Selection not updated";
+            selectionUpdatedValidator.EnableClientScript = true;
         }
 
         public void SetUpBrowsePageValidationSummary(ValidationSummary browsePageValidationSummary)
         {
             browsePageValidationSummary.DisplayMode = ValidationSummaryDisplayMode.BulletList;
             browsePageValidationSummary.ShowMessageBox = false;
-            browsePageValidationSummary.ShowSummary = true; 
+            browsePageValidationSummary.ShowSummary = true;
+            browsePageValidationSummary.EnableClientScript = true;
         }
 
-        protected void Order_Now_Clicked(object sender, EventArgs e)
+        protected void OrderNowClicked(object sender, EventArgs e)
         {
             SaveOrderToSession();
             Response.Redirect("order.aspx");
@@ -96,7 +99,7 @@ namespace emovies.website
 
         public void SaveOrderToSession()
         {
-            RepeaterItemCollection returnedMovieTable = RepeaterBrowse.Items;
+            RepeaterItemCollection returnedMovieTable = BrowsePageRepeater.Items;
             List<int> quantityList = new QuantityReader(returnedMovieTable).GetQuantityList();
             List<OrderLine> moviesOrdered = new ListOfOrderLineGenerator(quantityList, CurrentMoviesInRenderOrder).GenerateMovieOrders();
             Session["MoviesOrdered"] = moviesOrdered;

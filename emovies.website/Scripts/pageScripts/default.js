@@ -22,11 +22,7 @@ function updateTotal() {
 function calculateTotal() {
     var total = 0.0;
     movieList.forEach
-    ((movie)
-        =>  {
-            total += individualMovieTotal(movie);
-        }
-    );
+    ((movie) =>  {total += individualMovieTotal(movie); });
     return total;
 }
 
@@ -38,7 +34,7 @@ function individualMovieTotal(movie) {
 }
 
 function priceCellValue(movie) {
-    var priceCell = movie.querySelector(".table-row__price-bucket");
+    var priceCell = movie.querySelector(".table-row__price-currencyless");
     var priceCellValue = parseFloat(priceCell.value);
     return priceCellValue;
 }

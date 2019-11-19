@@ -10,14 +10,16 @@ namespace emovies.website.Data
     {
         public DisplayCustomer MapFromCustomer(Customer customer)
         {
-            return new DisplayCustomer
+            DisplayCustomer newDisplayCustomer = new DisplayCustomer
             {
                 Name = customer.Name,
                 Email = customer.Email,
                 ProtectedCardNumber = ProtectedForm(customer.CardNumber),
-                CardType = customer.CardNumber,
+                CardType = customer.CardType,
                 FuturePromotions = customer.FuturePromotions
             };
+
+            return newDisplayCustomer;
         }
 
         private string ProtectedForm(string cardNumber)
