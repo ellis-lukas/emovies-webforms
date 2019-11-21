@@ -28,9 +28,7 @@ namespace emovies.website.Data
                     writeMachine.WriteCustomer(stagedData.CustomerData);
                     writeMachine.WriteOrder(stagedData.CustomerOrderData);
                     foreach(OrderLine orderLine in stagedData.MovieOrders)
-                    {
                         writeMachine.WriterOrderLine(orderLine);
-                    }
 
                     transaction.Commit();
                 }

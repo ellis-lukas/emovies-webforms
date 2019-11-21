@@ -34,7 +34,7 @@ namespace emovies.website.Data
             {
                 _OrderWriter.AddedCustomerID = ID;
             } 
-            else if (tableWriter == _OrderWriter) 
+            if (tableWriter == _OrderWriter) 
             {
                 _OrderLinesWriter.AddedOrderID = ID;
             } 
