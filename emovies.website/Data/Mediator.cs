@@ -11,7 +11,7 @@ namespace emovies.website.Data
 
         private OrderWriter _OrderWriter;
 
-        private OrderLinesWriter _OrderLinesWriter;
+        private OrderLineWriter _OrderLinesWriter;
 
         public CustomerWriter CustomerWriter
         {
@@ -23,7 +23,7 @@ namespace emovies.website.Data
             set { _OrderWriter = value; }
         }
 
-        public OrderLinesWriter OrderLinesWriter
+        public OrderLineWriter OrderLinesWriter
         {
             set { _OrderLinesWriter = value; }
         }

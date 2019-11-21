@@ -17,6 +17,20 @@ namespace emovies.website.Data
         protected int LastAddedEntryID;
         protected SqlCommand Command;
 
+        public void Write()
+        {
+            InitialiseCommand();
+            AddDBConnection();
+            AddTransaction();
+            AddStoredProcedure();
+            AddCommandParameters();
+            InitialiseReturnParameter();
+            AddReturnParameter();
+            ExecuteCommand();
+            SetLastAddedEntryID();
+            SendLastAddedIDToMediator();
+        }
+
         protected void InitialiseCommand()
         {
             Command = new SqlCommand();
@@ -31,6 +45,10 @@ namespace emovies.website.Data
         {
             Command.Transaction = Transaction;
         }
+
+        protected abstract void AddStoredProcedure();
+
+        protected abstract void AddCommandParameters();
 
         protected void InitialiseReturnParameter()
         {

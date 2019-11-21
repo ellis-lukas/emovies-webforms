@@ -17,39 +17,20 @@ namespace emovies.website.Data
 
                 using (SqlTransaction transaction = dbConnection.BeginTransaction())
                 {
-                    Mediator mediator = new Mediator();
-
-                    CustomerWriter customerWriter = new CustomerWriter
+                    WriteMachineBuilder writeMachineBuilder = new WriteMachineBuilder
                     {
-                        Mediator = mediator,
-                        StagedData = stagedData,
-                        DBConnection = dbConnection,
-                        Transaction = transaction
+                        Transaction = transaction,
+                        DBConnection = dbConnection
                     };
 
-                    OrderWriter orderWriter = new OrderWriter
-                    {
-                        Mediator = mediator,
-                        StagedData = stagedData,
-                        DBConnection = dbConnection,
-                        Transaction = transaction
-                    };
-                    
-                    OrderLinesWriter orderLinesWriter = new OrderLinesWriter
-                    {
-                        Mediator = mediator,
-                        StagedData = stagedData,
-                        DBConnection = dbConnection,
-                        Transaction = transaction
-                    };
+                    WriteMachine writeMachine = writeMachineBuilder.BuildWriteMachine();
 
-                    mediator.CustomerWriter = customerWriter;
-                    mediator.OrderWriter = orderWriter;
-                    mediator.OrderLinesWriter = orderLinesWriter;
-
-                    customerWriter.Write();
-                    orderWriter.Write();
-                    orderLinesWriter.Write();
+                    writeMachine.WriteCustomer(stagedData.CustomerData);
+                    writeMachine.WriteOrder(stagedData.CustomerOrderData);
+                    foreach(OrderLine orderLine in stagedData.MovieOrders)
+                    {
+                        writeMachine.WriterOrderLine(orderLine);
+                    }
 
                     transaction.Commit();
                 }

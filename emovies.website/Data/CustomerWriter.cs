@@ -9,35 +9,21 @@ namespace emovies.website.Data
 {
     public class CustomerWriter : TableWriter
     {
-        public void Write()
-        {
-            InitialiseCommand();
-            AddDBConnection();
-            AddTransaction();
-            AddStoredProcedure();
-            AddCommandParameters();
-            InitialiseReturnParameter();
-            AddReturnParameter();
-            ExecuteCommand();
-            SetLastAddedEntryID();
-            SendLastAddedIDToMediator();
-        }
+        public Customer Customer;
 
-        private void AddStoredProcedure()
+        override protected void AddStoredProcedure()
         {
             Command.CommandType = CommandType.StoredProcedure;
             Command.CommandText = "AddNewCustomer";
         }
 
-        private void AddCommandParameters()
+        override protected void AddCommandParameters()
         {
-            Customer customer = StagedData.CustomerData;
-
-            Command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = customer.Name;
-            Command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = customer.Email;
-            Command.Parameters.Add("@CreditCardNumber", SqlDbType.NVarChar).Value = customer.CardNumber;
-            Command.Parameters.Add("@CreditCardType", SqlDbType.NVarChar).Value = customer.CardType;
-            Command.Parameters.Add("@FuturePromotions", SqlDbType.Bit).Value = customer.FuturePromotions;
+            Command.Parameters.Add("@Name", SqlDbType.NVarChar).Value = Customer.Name;
+            Command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = Customer.Email;
+            Command.Parameters.Add("@CreditCardNumber", SqlDbType.NVarChar).Value = Customer.CardNumber;
+            Command.Parameters.Add("@CreditCardType", SqlDbType.NVarChar).Value = Customer.CardType;
+            Command.Parameters.Add("@FuturePromotions", SqlDbType.Bit).Value = Customer.FuturePromotions;
             Command.Parameters.Add("@DateCreated", SqlDbType.DateTime).Value = DateTime.Now;
         }
     }
