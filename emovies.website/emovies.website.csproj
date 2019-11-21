@@ -158,6 +158,11 @@
     <Compile Include="Controls\UserTextInputControl.ascx.designer.cs">
       <DependentUpon>UserTextInputControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Mediator.cs" />
+    <Compile Include="Data\OrderLinesWriter.cs" />
+    <Compile Include="Data\OrderWriter.cs" />
+    <Compile Include="Data\TableWriter.cs" />
+    <Compile Include="Data\CustomerWriter.cs" />
     <Compile Include="Data\DataStager.cs" />
     <Compile Include="Data\DBReader.cs" />
     <Compile Include="Data\DBWriter.cs" />
@@ -167,6 +172,7 @@
     <Compile Include="Data\DisplayCustomer.cs" />
     <Compile Include="Data\DisplayCustomerMapper.cs" />
     <Compile Include="Data\DisplayOrderLineMapper.cs" />
+    <Compile Include="Data\IMediator.cs" />
     <Compile Include="Data\ListOfOrderLineMapper.cs" />
     <Compile Include="Data\ListOfOrderLineGenerator.cs" />
     <Compile Include="Data\CustomerOrder.cs" />
