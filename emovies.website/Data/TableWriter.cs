@@ -29,6 +29,32 @@ namespace emovies.website.Data
             ExecuteCommand();
             SetLastAddedEntryID();
             SendLastAddedIDToMediator();
+
+            //using (var command = BuildCommand())
+            //{
+            //    command.ExecuteReader();
+
+            //    var lastAddedEntryID = Convert.ToInt32(ReturnParameter.Value);
+            //    Mediator.SendIDToWriter(lastAddedEntryID, this);
+            //}
+        }
+
+        private SqlCommand BuildCommand()
+        {
+            var command = new SqlCommand();
+            command.Connection = DBConnection;
+            command.Transaction = Transaction;
+            AddStoredProcedure();
+            AddCommandParameters();
+
+            ReturnParameter = new SqlParameter("@RETURN_VALUE", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.ReturnValue
+            };
+
+            command.Parameters.Add(ReturnParameter);
+
+            return command;
         }
 
         protected void InitialiseCommand()

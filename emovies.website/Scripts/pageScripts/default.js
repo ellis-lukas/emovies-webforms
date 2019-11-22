@@ -51,11 +51,21 @@ function QuantityInputs() {
     this.quantityCells = document.querySelectorAll(".table-row__cell--quantity");
     this.areZero = function () { return arrayAllZeros(this.extractArray()); }
     this.extractArray = function () { return extractQuantityArray(this.quantityCells); }
+    this.areNonNegative = function () { return arrayNonNegative(this.extractArray());}
 }
 
 function arrayAllZeros(array) {
     for (var i = 0; i < array.length; i++) {
         if (array[i] != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function arrayNonNegative(array) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] < 0) {
             return false;
         }
     }
@@ -91,6 +101,9 @@ function ValidateSelectionUpdated(sender, args) {
     else if (arrayAllZeros(quantityArrayOnSubmission)) {
         args.IsValid = true;
     }
+    else if (!arrayNonNegative(quantityArrayOnSubmission)) {
+        args.IsValid = true;
+    }
     else {
         args.IsValid = false;
     }
@@ -98,6 +111,11 @@ function ValidateSelectionUpdated(sender, args) {
 
 function arraysAreEqual(arrayA, arrayB) {
     return (JSON.stringify(arrayA) === JSON.stringify(arrayB));
+}
+
+function ValidatorQuantityInputsNonNegative(sender, args) {
+    var quantityInputs = new QuantityInputs();
+    args.IsValid = quantityInputs.areNonNegative(); 
 }
 
 prepareMovieTable();

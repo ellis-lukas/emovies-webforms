@@ -49,19 +49,16 @@ namespace emovies.website
 
         public void SetUpBrowsePageValidation()
         {
-            SetUpBrowsePageInputValidation();
+            SetUpBrowsePageInputValidators();
+            SetUpBrowsePageInputServerValidation();
             SetUpBrowsePageValidationSummary(BrowsePageValidationSummary);
         }
 
-        public void SetUpBrowsePageInputValidation()
-        {
-            SetUpNonZeroValidation();
-            SetUpSelectionUpdatedValidation();
-        }
-
-        public void SetUpNonZeroValidation()
+        public void SetUpBrowsePageInputValidators()
         {
             SetUpNonZeroValidator(NonZeroValidator);
+            SetUpNonNegativeValidator(NonNegativeValidator);
+            SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
         }
 
         public void SetUpNonZeroValidator(CustomValidator nonZeroValidator)
@@ -71,9 +68,11 @@ namespace emovies.website
             nonZeroValidator.EnableClientScript = true;
         }
 
-        public void SetUpSelectionUpdatedValidation()
+        public void SetUpNonNegativeValidator(CustomValidator nonNegativeValidator)
         {
-            SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
+            nonNegativeValidator.Display = ValidatorDisplay.None;
+            nonNegativeValidator.ErrorMessage = "Cannot have negative quantity";
+            nonNegativeValidator.EnableClientScript = true;
         }
 
         public void SetUpSelectionUpdatedValidator(CustomValidator selectionUpdatedValidator)
@@ -81,6 +80,11 @@ namespace emovies.website
             selectionUpdatedValidator.Display = ValidatorDisplay.None;
             selectionUpdatedValidator.ErrorMessage = "Selection not updated";
             selectionUpdatedValidator.EnableClientScript = true;
+        }
+
+        public void SetUpBrowsePageInputServerValidation()
+        {
+            
         }
 
         public void SetUpBrowsePageValidationSummary(ValidationSummary browsePageValidationSummary)

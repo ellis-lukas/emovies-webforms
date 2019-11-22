@@ -230,6 +230,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images2\" />
+    <Folder Include="Data\Mappers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

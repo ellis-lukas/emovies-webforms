@@ -21,7 +21,8 @@
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-            <asp:CustomValidator ID="NonZeroValidator" ClientValidationFunction="ValidateQuantityInputsNonZero" runat="server"></asp:CustomValidator>
+            <asp:CustomValidator ID="NonZeroValidator" ClientValidationFunction="ValidateQuantityInputsNonZero" runat="server" />
+            <asp:CustomValidator ID="NonNegativeValidator" ClientValidationFunction="ValidatorQuantityInputsNonNegative" runat="server" />
             <div class="total total--table">
                 <div class="total__cell total__cell--label total__cell--label-table">Total</div>
                 <div class="total__cell total__cell--value total__cell--value-table"></div>

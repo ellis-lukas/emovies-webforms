@@ -263,11 +263,9 @@ select {
     background-size: cover;
 }
 
-
 .form-row__checkbox {
     display: none;
 }
-
 
 .form-row__checkbox:checked {
     
@@ -335,22 +333,22 @@ select {
     width: 156px;
 }
 
-.total__cell--label-table {
-    right: 120px;
-}
-
-.total__cell--label-summary {
-    right: 160px;
-}
-
 .total__cell--value {
     display: block;
     width: 84px;
     right: 0px;
 }
 
+.total__cell--label-table {
+    right: 120px;
+}
+
 .total__cell--value-table {
     text-align: center;
+}
+
+.total__cell--label-summary {
+    right: 160px;
 }
 
 .total__cell--value-summary {
@@ -371,15 +369,15 @@ select {
     color: red;
 }
 
-.invalid-required {
+.form-row__cell--invalid-required {
     border-color: red;
 }
 
-.invalid-regular-expression {
+.form-row__cell--invalid-regular-expression {
     border-color: red;
 }
 
-/*These are used for adding classes to invalid fields, we don't need to see them!*/
+/*These classes are added to validator callout extenders (VCEs). VCEs enable classes to be added to invalid inputs. We don't want to SEE the VCEs, though!*/
 .required-extender {
     display: none;
 }
