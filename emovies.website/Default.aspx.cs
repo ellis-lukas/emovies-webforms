@@ -58,7 +58,7 @@ namespace emovies.website
         {
             SetUpNonZeroValidator(NonZeroValidator);
             SetUpNonNegativeValidator(NonNegativeValidator);
-            //SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
+            SetUpRangeValidator(RangeValidator);
         }
 
         public void SetUpNonZeroValidator(CustomValidator nonZeroValidator)
@@ -75,11 +75,11 @@ namespace emovies.website
             nonNegativeValidator.EnableClientScript = true;
         }
 
-        public void SetUpSelectionUpdatedValidator(CustomValidator selectionUpdatedValidator)
+        public void SetUpRangeValidator(CustomValidator rangeValidator)
         {
-            selectionUpdatedValidator.Display = ValidatorDisplay.None;
-            selectionUpdatedValidator.ErrorMessage = "Selection not updated";
-            selectionUpdatedValidator.EnableClientScript = true;
+            rangeValidator.Display = ValidatorDisplay.None;
+            rangeValidator.ErrorMessage = "Quantity Above 254 Limit!";
+            rangeValidator.EnableClientScript = true;
         }
 
         public void SetUpBrowsePageInputServerValidation()

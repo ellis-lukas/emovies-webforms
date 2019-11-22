@@ -3,9 +3,6 @@ const orderButton = document.querySelector(".order__button");
 const totalValueCell = document.querySelector(".total__cell--value");
 const movieList = document.querySelectorAll(".table-row");
 
-var quantityArrayOnSubmission = [];
-var quantityArrayOnUpdate = [];
-
 function prepareMovieTable() {
     updateTotal();
 }
@@ -51,7 +48,7 @@ function QuantityInputs() {
     this.quantityCells = document.querySelectorAll(".table-row__cell--quantity");
     this.areZero = function () { return arrayAllZeros(this.extractArray()); }
     this.extractArray = function () { return extractQuantityArray(this.quantityCells); }
-    this.areNonNegative = function () { return arrayNonNegative(this.extractArray());}
+    this.areNegative = function () { return arrayNegative(this.extractArray());}
 }
 
 function arrayAllZeros(array) {
@@ -63,13 +60,13 @@ function arrayAllZeros(array) {
     return true;
 }
 
-function arrayNonNegative(array) {
+function arrayNegative(array) {
     for (var i = 0; i < array.length; i++) {
         if (array[i] < 0) {
-            return false;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 function extractQuantityArray(quantityCells) {
@@ -85,42 +82,13 @@ function ValidateQuantityInputsNonZero(sender, args) {
     args.IsValid = !(quantityInputs.areZero());
 }
 
-function captureQuantitiesOnUpdate() {
-    quantityArrayOnUpdate = new QuantityInputs().extractArray();
-}
-
-function captureQuantitiesOnSubmission() {
-    quantityArrayOnSubmission = new QuantityInputs().extractArray();
-}
-
-function ValidateSelectionUpdated(sender, args) {
-    captureQuantitiesOnSubmission();
-    if (arraysAreEqual(quantityArrayOnSubmission, quantityArrayOnUpdate)) {
-        args.IsValid = true;
-    }
-    else if (arrayAllZeros(quantityArrayOnSubmission)) {
-        args.IsValid = true;
-    }
-    else if (!arrayNonNegative(quantityArrayOnSubmission)) {
-        args.IsValid = true;
-    }
-    else {
-        args.IsValid = false;
-    }
-}
-
-function arraysAreEqual(arrayA, arrayB) {
-    return (JSON.stringify(arrayA) === JSON.stringify(arrayB));
-}
-
-function ValidatorQuantityInputsNonNegative(sender, args) {
+function ValidateQuantityInputsNonNegative(sender, args) {
     var quantityInputs = new QuantityInputs();
-    args.IsValid = quantityInputs.areNonNegative(); 
+    args.IsValid = !quantityInputs.areNegative(); 
 }
 
 prepareMovieTable();
 updateButton.addEventListener("click", update);
-updateButton.addEventListener("click", CheckIfNonNegative);
 
 
 

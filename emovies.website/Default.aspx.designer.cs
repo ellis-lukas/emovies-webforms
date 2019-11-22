@@ -42,6 +42,15 @@ namespace emovies.website
         protected global::System.Web.UI.WebControls.CustomValidator NonNegativeValidator;
 
         /// <summary>
+        /// RangeValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator RangeValidator;
+
+        /// <summary>
         /// OrderNowButton control.
         /// </summary>
         /// <remarks>

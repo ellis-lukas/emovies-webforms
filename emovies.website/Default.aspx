@@ -21,22 +21,22 @@
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-            <asp:CustomValidator ID="NonZeroValidator" ClientValidationFunction="ValidateQuantityInputsNonZero" ValidationGroup="update" runat="server"/>
-            <asp:CustomValidator ID="NonNegativeValidator" ClientValidationFunction="ValidatorQuantityInputsNonNegative" ValidationGroup="update" runat="server"/>
+            <asp:CustomValidator ID="NonZeroValidator" ClientValidationFunction="ValidateQuantityInputsNonZero" runat="server"/>
+            <asp:CustomValidator ID="NonNegativeValidator" ClientValidationFunction="ValidateQuantityInputsNonNegative" runat="server"/>
+            <asp:CustomValidator ID="RangeValidator" ClientValidationFunction="ValidateQuantityInputsInRange" runat="server" />
             <div class="total total--table">
                 <div class="total__cell total__cell--label total__cell--label-table">Total</div>
                 <div class="total__cell total__cell--value total__cell--value-table"></div>
             </div>
         </div>
         <div class="update">
-            <asp:Button ValidationGroup="update" CausesValidation="true" CssClass="update__button" Text="Update" runat="server" />
+            <asp:Button CausesValidation="false" CssClass="update__button" Text="Update" runat="server" />
         </div>
     </div>
     <div class="notice">Tickets are only valid for use on the day of purchase</div>
     <div class="order order--order-now">
         <asp:Button ID="OrderNowButton" CssClass="order__button" Text="Order now >>" OnClick="OrderNowClicked" runat="server" />
     </div>
-    <%--<asp:CustomValidator ID="SelectionUpdatedValidator" ClientValidationFunction="ValidateSelectionUpdated" runat="server"></asp:CustomValidator>--%>
-    <asp:ValidationSummary ValidationGroup="update" EnableClientScript="true" ID="BrowsePageValidationSummary" runat="server" />
+    <asp:ValidationSummary EnableClientScript="true" ID="BrowsePageValidationSummary" runat="server" />
     <script type="text/javascript" src="Scripts/pageScripts/default.js"></script>
 </asp:Content>
