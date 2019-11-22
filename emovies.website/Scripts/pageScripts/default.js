@@ -120,7 +120,7 @@ function ValidatorQuantityInputsNonNegative(sender, args) {
 
 prepareMovieTable();
 updateButton.addEventListener("click", update);
-
+updateButton.addEventListener("click", CheckIfNonNegative);
 
 
 

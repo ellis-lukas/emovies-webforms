@@ -9,34 +9,23 @@ namespace emovies.website.Data
 {
     public abstract class TableWriter
     {
-        public Mediator Mediator;
-        public DataStagedForDBWrite StagedData;
         public SqlConnection DBConnection;
         public SqlTransaction Transaction;
-        protected SqlParameter ReturnParameter;
-        protected int LastAddedEntryID;
-        protected SqlCommand Command;
+        private SqlParameter ReturnParameter;
 
         public void Write()
         {
-            InitialiseCommand();
-            AddDBConnection();
-            AddTransaction();
-            AddStoredProcedure();
-            AddCommandParameters();
-            InitialiseReturnParameter();
-            AddReturnParameter();
-            ExecuteCommand();
-            SetLastAddedEntryID();
-            SendLastAddedIDToMediator();
+            SqlCommand tableWriteCommand = BuildCommand();
+            AddStoredProcedure(tableWriteCommand);
+            AddCommandParameters(tableWriteCommand);
+            AddReturnParameter(tableWriteCommand);
+            ExecuteCommand(tableWriteCommand);
+        }
 
-            //using (var command = BuildCommand())
-            //{
-            //    command.ExecuteReader();
-
-            //    var lastAddedEntryID = Convert.ToInt32(ReturnParameter.Value);
-            //    Mediator.SendIDToWriter(lastAddedEntryID, this);
-            //}
+        public int GetLastAddedEntryID()
+        {
+            int lastAddedEntryID = Convert.ToInt32(ReturnParameter.Value);
+            return lastAddedEntryID;
         }
 
         private SqlCommand BuildCommand()
@@ -44,67 +33,30 @@ namespace emovies.website.Data
             var command = new SqlCommand();
             command.Connection = DBConnection;
             command.Transaction = Transaction;
-            AddStoredProcedure();
-            AddCommandParameters();
 
+            return command;
+        }
+
+        private void AddReturnParameter(SqlCommand command)
+        {
             ReturnParameter = new SqlParameter("@RETURN_VALUE", SqlDbType.Int)
             {
                 Direction = ParameterDirection.ReturnValue
             };
 
             command.Parameters.Add(ReturnParameter);
-
-            return command;
         }
 
-        protected void InitialiseCommand()
+        protected abstract void AddStoredProcedure(SqlCommand command);
+
+        protected abstract void AddCommandParameters(SqlCommand command);
+
+        protected void ExecuteCommand(SqlCommand command)
         {
-            Command = new SqlCommand();
-        }
-
-        protected void AddDBConnection()
-        {
-            Command.Connection = DBConnection;
-        }
-
-        protected void AddTransaction()
-        {
-            Command.Transaction = Transaction;
-        }
-
-        protected abstract void AddStoredProcedure();
-
-        protected abstract void AddCommandParameters();
-
-        protected void InitialiseReturnParameter()
-        {
-            ReturnParameter = new SqlParameter("@RETURN_VALUE", SqlDbType.Int)
+            using (command)
             {
-                Direction = ParameterDirection.ReturnValue
-            };
-        }
-
-        protected void AddReturnParameter()
-        {
-            Command.Parameters.Add(ReturnParameter);
-        }
-
-        protected void ExecuteCommand()
-        {
-            using (Command)
-            {
-                Command.ExecuteReader();
+                command.ExecuteReader();
             }
-        }
-
-        protected void SetLastAddedEntryID()
-        {
-            LastAddedEntryID = Convert.ToInt32(ReturnParameter.Value);
-        }
-
-        protected void SendLastAddedIDToMediator()
-        {
-            Mediator.SendIDToWriter(LastAddedEntryID, this);
         }
     }
 }

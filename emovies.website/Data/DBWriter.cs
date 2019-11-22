@@ -17,19 +17,36 @@ namespace emovies.website.Data
 
                 using (SqlTransaction transaction = dbConnection.BeginTransaction())
                 {
-                    WriteMachineBuilder writeMachineBuilder = new WriteMachineBuilder
+                    CustomerWriter customerWriter = new CustomerWriter
                     {
-                        Transaction = transaction,
-                        DBConnection = dbConnection
+                        DBConnection = dbConnection,
+                        Transaction = transaction
                     };
 
-                    WriteMachine writeMachine = writeMachineBuilder.BuildWriteMachine();
-
-                    writeMachine.WriteCustomer(stagedData.CustomerData);
-                    writeMachine.WriteOrder(stagedData.CustomerOrderData);
-                    foreach(OrderLine orderLine in stagedData.MovieOrders)
+                    OrderWriter orderWriter = new OrderWriter
                     {
-                        writeMachine.WriterOrderLine(orderLine);
+                        DBConnection = dbConnection,
+                        Transaction = transaction
+                    };
+
+                    OrderLineWriter orderLineWriter = new OrderLineWriter
+                    {
+                        DBConnection = dbConnection,
+                        Transaction = transaction
+                    };
+
+                    customerWriter.Customer = stagedData.CustomerData;
+                    customerWriter.Write();
+
+                    orderWriter.CustomerOrder = stagedData.CustomerOrderData;
+                    orderWriter.AddedCustomerID = customerWriter.GetLastAddedEntryID();
+                    orderWriter.Write();
+
+                    foreach(OrderLine movieOrder in stagedData.MovieOrders)
+                    {
+                        orderLineWriter.OrderLine = movieOrder;
+                        orderLineWriter.AddedOrderID = orderWriter.GetLastAddedEntryID();
+                        orderLineWriter.Write();
                     }
 
                     transaction.Commit();

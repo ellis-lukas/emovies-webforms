@@ -13,17 +13,17 @@ namespace emovies.website.Data
 
         public CustomerOrder CustomerOrder;
 
-        override protected void AddStoredProcedure()
+        override protected void AddStoredProcedure(SqlCommand command)
         {
-            Command.CommandType = CommandType.StoredProcedure;
-            Command.CommandText = "AddNewOrder";
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "AddNewOrder";
         }
 
-        override protected void AddCommandParameters()
+        override protected void AddCommandParameters(SqlCommand command)
         {
-            Command.Parameters.Add("@DateCreated", SqlDbType.DateTime).Value = DateTime.Now;
-            Command.Parameters.Add("@Total", SqlDbType.Decimal).Value = CustomerOrder.Total;
-            Command.Parameters.Add("@CustomerId", SqlDbType.Int).Value = AddedCustomerID;
+            command.Parameters.Add("@DateCreated", SqlDbType.DateTime).Value = DateTime.Now;
+            command.Parameters.Add("@Total", SqlDbType.Decimal).Value = CustomerOrder.Total;
+            command.Parameters.Add("@CustomerId", SqlDbType.Int).Value = AddedCustomerID;
         }
     }
 }

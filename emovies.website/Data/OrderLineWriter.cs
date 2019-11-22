@@ -13,18 +13,18 @@ namespace emovies.website.Data
 
         public OrderLine OrderLine;
 
-        override protected void AddStoredProcedure()
+        override protected void AddStoredProcedure(SqlCommand command)
         {
-            Command.CommandType = CommandType.StoredProcedure;
-            Command.CommandText = "AddNewOrderLine";
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "AddNewOrderLine";
         }
 
-        override protected void AddCommandParameters()
+        override protected void AddCommandParameters(SqlCommand command)
         {
-            Command.Parameters.Add("@OrderId", SqlDbType.Int).Value = AddedOrderID;
-            Command.Parameters.Add("@MovieId", SqlDbType.Int).Value = OrderLine.MovieId;
-            Command.Parameters.Add("@Price", SqlDbType.Decimal).Value = OrderLine.Price;
-            Command.Parameters.Add("@Quantity", SqlDbType.TinyInt).Value = OrderLine.Quantity;
+            command.Parameters.Add("@OrderId", SqlDbType.Int).Value = AddedOrderID;
+            command.Parameters.Add("@MovieId", SqlDbType.Int).Value = OrderLine.MovieId;
+            command.Parameters.Add("@Price", SqlDbType.Decimal).Value = OrderLine.Price;
+            command.Parameters.Add("@Quantity", SqlDbType.TinyInt).Value = OrderLine.Quantity;
         }
     }
 }

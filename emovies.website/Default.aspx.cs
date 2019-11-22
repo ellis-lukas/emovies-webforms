@@ -58,7 +58,7 @@ namespace emovies.website
         {
             SetUpNonZeroValidator(NonZeroValidator);
             SetUpNonNegativeValidator(NonNegativeValidator);
-            SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
+            //SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
         }
 
         public void SetUpNonZeroValidator(CustomValidator nonZeroValidator)

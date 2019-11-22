@@ -161,6 +161,10 @@ select {
     right: 0;
     width: 184px;
     top: 0px;
+    border: none;
+    color: #fff;
+    font-size: 1em;
+    outline: none;
 }
 
 .notice {
