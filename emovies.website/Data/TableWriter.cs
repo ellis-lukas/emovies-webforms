@@ -9,58 +9,54 @@ namespace emovies.website.Data
 {
     public abstract class TableWriter
     {
-        public Mediator Mediator;
-        public DataStagedForDBWrite StagedData;
         public SqlConnection DBConnection;
         public SqlTransaction Transaction;
-        protected SqlParameter ReturnParameter;
-        protected int LastAddedEntryID;
-        protected SqlCommand Command;
+        private SqlParameter ReturnParameter;
 
-        protected void InitialiseCommand()
+        public void Write()
         {
-            Command = new SqlCommand();
+            SqlCommand tableWriteCommand = BuildCommand();
+            AddStoredProcedure(tableWriteCommand);
+            AddCommandParameters(tableWriteCommand);
+            AddReturnParameter(tableWriteCommand);
+            ExecuteCommand(tableWriteCommand);
         }
 
-        protected void AddDBConnection()
+        public int GetLastAddedEntryID()
         {
-            Command.Connection = DBConnection;
+            int lastAddedEntryID = Convert.ToInt32(ReturnParameter.Value);
+            return lastAddedEntryID;
         }
 
-        protected void AddTransaction()
+        private SqlCommand BuildCommand()
         {
-            Command.Transaction = Transaction;
+            var command = new SqlCommand();
+            command.Connection = DBConnection;
+            command.Transaction = Transaction;
+
+            return command;
         }
 
-        protected void InitialiseReturnParameter()
+        private void AddReturnParameter(SqlCommand command)
         {
             ReturnParameter = new SqlParameter("@RETURN_VALUE", SqlDbType.Int)
             {
                 Direction = ParameterDirection.ReturnValue
             };
+
+            command.Parameters.Add(ReturnParameter);
         }
 
-        protected void AddReturnParameter()
-        {
-            Command.Parameters.Add(ReturnParameter);
-        }
+        protected abstract void AddStoredProcedure(SqlCommand command);
 
-        protected void ExecuteCommand()
+        protected abstract void AddCommandParameters(SqlCommand command);
+
+        protected void ExecuteCommand(SqlCommand command)
         {
-            using (Command)
+            using (command)
             {
-                Command.ExecuteReader();
+                command.ExecuteReader();
             }
-        }
-
-        protected void SetLastAddedEntryID()
-        {
-            LastAddedEntryID = Convert.ToInt32(ReturnParameter.Value);
-        }
-
-        protected void SendLastAddedIDToMediator()
-        {
-            Mediator.SendIDToWriter(LastAddedEntryID, this);
         }
     }
 }

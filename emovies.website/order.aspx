@@ -15,7 +15,7 @@
             </div>
             <div class="form-row form-row--lower">
                 <div class="form-row__label-input-container">
-                    <asp:Label AssociatedControlID="CardType" CssClass="form-row__cell form-row__cell--label" runat="server">Credit card type</asp:Label>
+                    <asp:Label AssociatedControlID="CardType" CssClass="form-row__cell form-row__cell--label" Text="Credit card type" runat="server"/>
                     <asp:DropDownList ID="CardType" CssClass="form-row__card-type form-row__cell form-row__cell--input form-row__cell--select form-row__cell--white" runat="server">
                         <asp:ListItem>Mastercard</asp:ListItem>
                         <asp:ListItem>Visa</asp:ListItem>
@@ -26,7 +26,7 @@
             </div>
             <div class="form-row form-row--lower">
                 <div class="form-row__label-input-container">
-                    <asp:Label AssociatedControlID="futurePromotions" CssClass="form-row__cell form-row__cell--label form-row__cell--shifted" runat="server">Please email me<br>future promotions</asp:Label>
+                    <asp:Label AssociatedControlID="futurePromotions" CssClass="form-row__cell form-row__cell--label form-row__cell--shifted" Text="Please email me<br>future promotions" runat="server"/>
                     <div class="form-row__cell form-row__cell--input form-row__cell--checkbox-container form-row__cell--white">
                         <asp:CheckBox ID="FuturePromotions" CssClass="form-row__checkbox" runat="server" Checked="False" />
                         <asp:Label ID="CheckImage" AssociatedControlID="FuturePromotions" CssClass="form-row__check-image" runat="server"></asp:Label>

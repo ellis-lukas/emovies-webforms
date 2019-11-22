@@ -9,7 +9,7 @@
 <div class="form-row__validators-container">
     <asp:RequiredFieldValidator CssClass="form-row__validator form-row__required-field-validator" ID="RequiredFieldValidator" ControlToValidate="TextInput" runat="server" />
     <asp:RegularExpressionValidator CssClass="form-row__validator form-row__regular-expression-validator" ID="RegularExpressionValidator" ControlToValidate="TextInput" runat="server" />
-    <ajaxToolkit:ValidatorCalloutExtender HighlightCssClass="invalid-required" ID="RVExtender" runat="server" TargetControlID="RequiredFieldValidator" CssClass="required-extender" EnableViewState="true" />
-    <ajaxToolkit:ValidatorCalloutExtender HighlightCssClass="invalid-regular-expression" ID="REExtender" runat="server" TargetControlID="RegularExpressionValidator" CssClass="regular-expression-extender" />
+    <ajaxToolkit:ValidatorCalloutExtender HighlightCssClass="form-row__cell--invalid-required" ID="RVExtender" runat="server" TargetControlID="RequiredFieldValidator" CssClass="required-extender" EnableViewState="true" />
+    <ajaxToolkit:ValidatorCalloutExtender HighlightCssClass="form-row__cell--invalid-regular-expression" ID="REExtender" runat="server" TargetControlID="RegularExpressionValidator" CssClass="regular-expression-extender" />
 </div>
 

@@ -17,39 +17,37 @@ namespace emovies.website.Data
 
                 using (SqlTransaction transaction = dbConnection.BeginTransaction())
                 {
-                    Mediator mediator = new Mediator();
-
                     CustomerWriter customerWriter = new CustomerWriter
                     {
-                        Mediator = mediator,
-                        StagedData = stagedData,
                         DBConnection = dbConnection,
                         Transaction = transaction
                     };
 
                     OrderWriter orderWriter = new OrderWriter
                     {
-                        Mediator = mediator,
-                        StagedData = stagedData,
                         DBConnection = dbConnection,
                         Transaction = transaction
                     };
-                    
-                    OrderLinesWriter orderLinesWriter = new OrderLinesWriter
+
+                    OrderLineWriter orderLineWriter = new OrderLineWriter
                     {
-                        Mediator = mediator,
-                        StagedData = stagedData,
                         DBConnection = dbConnection,
                         Transaction = transaction
                     };
 
-                    mediator.CustomerWriter = customerWriter;
-                    mediator.OrderWriter = orderWriter;
-                    mediator.OrderLinesWriter = orderLinesWriter;
-
+                    customerWriter.Customer = stagedData.CustomerData;
                     customerWriter.Write();
+
+                    orderWriter.CustomerOrder = stagedData.CustomerOrderData;
+                    orderWriter.AddedCustomerID = customerWriter.GetLastAddedEntryID();
                     orderWriter.Write();
-                    orderLinesWriter.Write();
+
+                    foreach(OrderLine movieOrder in stagedData.MovieOrders)
+                    {
+                        orderLineWriter.OrderLine = movieOrder;
+                        orderLineWriter.AddedOrderID = orderWriter.GetLastAddedEntryID();
+                        orderLineWriter.Write();
+                    }
 
                     transaction.Commit();
                 }

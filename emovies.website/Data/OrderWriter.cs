@@ -11,33 +11,19 @@ namespace emovies.website.Data
     {
         public int AddedCustomerID;
 
-        public void Write()
+        public CustomerOrder CustomerOrder;
+
+        override protected void AddStoredProcedure(SqlCommand command)
         {
-            InitialiseCommand();
-            AddDBConnection();
-            AddTransaction();
-            AddStoredProcedure();
-            AddCommandParameters();
-            InitialiseReturnParameter();
-            AddReturnParameter();
-            ExecuteCommand();
-            SetLastAddedEntryID();
-            SendLastAddedIDToMediator();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "AddNewOrder";
         }
 
-        private void AddStoredProcedure()
+        override protected void AddCommandParameters(SqlCommand command)
         {
-            Command.CommandType = CommandType.StoredProcedure;
-            Command.CommandText = "AddNewOrder";
-        }
-
-        private void AddCommandParameters()
-        {
-            CustomerOrder customerOrder = StagedData.CustomerOrderData;
-
-            Command.Parameters.Add("@DateCreated", SqlDbType.DateTime).Value = DateTime.Now;
-            Command.Parameters.Add("@Total", SqlDbType.Decimal).Value = customerOrder.Total;
-            Command.Parameters.Add("@CustomerId", SqlDbType.Int).Value = AddedCustomerID;
+            command.Parameters.Add("@DateCreated", SqlDbType.DateTime).Value = DateTime.Now;
+            command.Parameters.Add("@Total", SqlDbType.Decimal).Value = CustomerOrder.Total;
+            command.Parameters.Add("@CustomerId", SqlDbType.Int).Value = AddedCustomerID;
         }
     }
 }
