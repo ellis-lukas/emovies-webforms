@@ -15,49 +15,49 @@ namespace emovies.website
     {
 
         /// <summary>
-        /// CustomerName control.
+        /// Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CustomerName;
+        protected global::System.Web.UI.WebControls.Label Name;
 
         /// <summary>
-        /// CustomerEmail control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CustomerEmail;
+        protected global::System.Web.UI.WebControls.Label Email;
 
         /// <summary>
-        /// CustomerCardNumber control.
+        /// CardNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CustomerCardNumber;
+        protected global::System.Web.UI.WebControls.Label CardNumber;
 
         /// <summary>
-        /// CustomerCardType control.
+        /// CardType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CustomerCardType;
+        protected global::System.Web.UI.WebControls.Label CardType;
 
         /// <summary>
-        /// CustomerFuturePromotions control.
+        /// FuturePromotions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CustomerFuturePromotions;
+        protected global::System.Web.UI.WebControls.Label FuturePromotions;
 
         /// <summary>
         /// RepeaterConfirmation control.

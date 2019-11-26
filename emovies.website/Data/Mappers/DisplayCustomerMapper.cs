@@ -10,7 +10,7 @@ namespace emovies.website.Data
     {
         public DisplayCustomer MapFromCustomer(Customer customer)
         {
-            DisplayCustomer newDisplayCustomer = new DisplayCustomer
+            return new DisplayCustomer
             {
                 Name = customer.Name,
                 Email = customer.Email,
@@ -18,8 +18,6 @@ namespace emovies.website.Data
                 CardType = customer.CardType,
                 FuturePromotions = customer.FuturePromotions
             };
-
-            return newDisplayCustomer;
         }
 
         private string ProtectedForm(string cardNumber)

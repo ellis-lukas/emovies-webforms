@@ -1,25 +1,27 @@
 ﻿using emovies.website.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Globalization;
 using System.Threading;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace emovies.website
 {
     public partial class Default : Page
     {
-        private readonly IMovieRepository MovieRepository = new MovieDatabaseRepository();
+        private readonly MovieRepository movieRepository = MovieRepository.GetInstance();
+
         private List<Movie> CurrentMovies { get
-            { return MovieRepository.GetMovies(); }
+            { return movieRepository.GetMovies(); }
         }
 
         private List<Movie> CurrentMoviesInRenderOrder { get 
             { return CurrentMovies; }
         }
+
+        private RepeaterItemCollection returnedMovieTable;
+        private List<int> quantityList;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,61 +31,67 @@ namespace emovies.website
             }
         }
 
-        public void SetupBrowsePageOnFirstLoad()
+        private void SetupBrowsePageOnFirstLoad()
         {
             SetPageCultureToBritish();
             LoadMoviesIntoPage();
             SetUpBrowsePageValidation();
         }
 
-        public void SetPageCultureToBritish()
+        private void SetPageCultureToBritish()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
         }
 
-        public void LoadMoviesIntoPage()
+        private void LoadMoviesIntoPage()
         {
             BrowsePageRepeater.DataSource = CurrentMoviesInRenderOrder;
             BrowsePageRepeater.DataBind();
         }
 
-        public void SetUpBrowsePageValidation()
+        private void SetUpBrowsePageValidation()
         {
-            SetUpBrowsePageInputValidation();
+            SetUpBrowsePageInputValidators();
             SetUpBrowsePageValidationSummary(BrowsePageValidationSummary);
         }
 
-        public void SetUpBrowsePageInputValidation()
+        private void SetUpBrowsePageInputValidators()
         {
-            SetUpNonZeroValidation();
-            SetUpSelectionUpdatedValidation();
+            SetUpNonZeroValidator(NotZerosValidator);
+            SetUpNonNegativeValidator(NoNegativesValidator);
+            SetUpRangeValidator(RangeValidator);
+            SetUpFormatValidator(FormatValidator);
         }
 
-        public void SetUpNonZeroValidation()
-        {
-            SetUpNonZeroValidator(NonZeroValidator);
-        }
-
-        public void SetUpNonZeroValidator(CustomValidator nonZeroValidator)
+        private void SetUpNonZeroValidator(CustomValidator nonZeroValidator)
         {
             nonZeroValidator.Display = ValidatorDisplay.None;
             nonZeroValidator.ErrorMessage = "No movies selected";
             nonZeroValidator.EnableClientScript = true;
         }
 
-        public void SetUpSelectionUpdatedValidation()
+        private void SetUpNonNegativeValidator(CustomValidator nonNegativeValidator)
         {
-            SetUpSelectionUpdatedValidator(SelectionUpdatedValidator);
+            nonNegativeValidator.Display = ValidatorDisplay.None;
+            nonNegativeValidator.ErrorMessage = "Cannot have negative quantity";
+            nonNegativeValidator.EnableClientScript = true;
         }
 
-        public void SetUpSelectionUpdatedValidator(CustomValidator selectionUpdatedValidator)
+        private void SetUpRangeValidator(CustomValidator rangeValidator)
         {
-            selectionUpdatedValidator.Display = ValidatorDisplay.None;
-            selectionUpdatedValidator.ErrorMessage = "Selection not updated";
-            selectionUpdatedValidator.EnableClientScript = true;
+            rangeValidator.Display = ValidatorDisplay.None;
+            rangeValidator.ErrorMessage = "Quantity Outside Permitted Range!";
+            rangeValidator.EnableClientScript = true;
         }
 
-        public void SetUpBrowsePageValidationSummary(ValidationSummary browsePageValidationSummary)
+        private void SetUpFormatValidator(CustomValidator formatValidator)
+        {
+            formatValidator.Display = ValidatorDisplay.None;
+            formatValidator.ErrorMessage = "Inputs Of Incorrect Format";
+            formatValidator.EnableClientScript = true;
+        }
+
+        private void SetUpBrowsePageValidationSummary(ValidationSummary browsePageValidationSummary)
         {
             browsePageValidationSummary.DisplayMode = ValidationSummaryDisplayMode.BulletList;
             browsePageValidationSummary.ShowMessageBox = false;
@@ -93,16 +101,98 @@ namespace emovies.website
 
         protected void OrderNowClicked(object sender, EventArgs e)
         {
-            SaveOrderToSession();
-            Response.Redirect("order.aspx");
+            returnedMovieTable = BrowsePageRepeater.Items;
+
+            Validate();
+
+            if (Page.IsValid)
+            {
+                quantityList = new QuantityReader(returnedMovieTable).GetQuantityList();
+                SaveOrderToSession();
+                Response.Redirect("order.aspx");
+            }
         }
 
-        public void SaveOrderToSession()
+        private void SaveOrderToSession()
         {
-            RepeaterItemCollection returnedMovieTable = BrowsePageRepeater.Items;
-            List<int> quantityList = new QuantityReader(returnedMovieTable).GetQuantityList();
-            List<OrderLine> moviesOrdered = new ListOfOrderLineGenerator(quantityList, CurrentMoviesInRenderOrder).GenerateMovieOrders();
+            List<OrderLine> moviesOrdered = new ListOfOrderLineGenerator(quantityList, CurrentMoviesInRenderOrder).GenerateOrderLines();
             Session["MoviesOrdered"] = moviesOrdered;
+        }
+
+        protected void ServerValidateFormat(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                args.IsValid = true;
+            }
+            catch
+            {
+                args.IsValid = false;
+            }
+
+        }
+
+        protected void ServerValidateNotZeros(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                try
+                {
+                    bool quantityListAllZeros = quantityListTest.ContainsAllZeros();
+                    args.IsValid = !quantityListAllZeros;
+                }
+                catch
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        protected void ServerValidateNoNegatives(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                try
+                {
+                    bool quantityListContainsNegatives = quantityListTest.ContainsNegativeValues();
+                    args.IsValid = !quantityListContainsNegatives;
+                }
+                catch
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        protected void ServerValidateInRange(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                try
+                {
+                    bool quantityListOutOfRange = quantityListTest.IntegersOutOfRange(254);
+                    args.IsValid = !quantityListOutOfRange;
+                }
+                catch
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }
