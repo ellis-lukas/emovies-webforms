@@ -184,7 +184,7 @@
     </Compile>
     <Compile Include="Data\DBReading\MovieRepository.cs" />
     <Compile Include="Data\FundamentalDataStructures\OrderLine.cs" />
-    <Compile Include="Data\SelectionReading\QuantityReader.cs" />
+    <Compile Include="Data\SelectionReading\QuantityExtractor.cs" />
     <Compile Include="order.aspx.cs">
       <DependentUpon>order.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

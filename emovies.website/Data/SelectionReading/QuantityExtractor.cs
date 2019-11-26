@@ -6,18 +6,24 @@ using System.Web.UI.WebControls;
 
 namespace emovies.website.Data
 {
-    public interface IQuantityReader
+    public interface IQuantityExtractor
     {
-        List<int> GetQuantityList();
+        List<int> ExtractQuantityList();
     }
 
-    public class QuantityReader : IQuantityReader
+    public class QuantityExtractor : IQuantityExtractor
     {
-        private List<int> quantityList;
+        private readonly RepeaterItemCollection ReturnedMovieTable;
 
-        public QuantityReader(RepeaterItemCollection returnedMovieTable)
+        public QuantityExtractor(RepeaterItemCollection returnedMovieTable)
         {
-            quantityList = ListFromRepeaterItemCollection(returnedMovieTable);
+            ReturnedMovieTable = returnedMovieTable;
+        }
+
+        public List<int> ExtractQuantityList()
+        {
+            List<int> quantityList = ListFromRepeaterItemCollection(ReturnedMovieTable);
+            return quantityList;
         }
 
         private List<int> ListFromRepeaterItemCollection(RepeaterItemCollection returnedMovieTable)
@@ -35,11 +41,6 @@ namespace emovies.website.Data
             TextBox quantityCell = (TextBox)repeaterItem.FindControl("quantityCell");
             int quantity = int.Parse(quantityCell.Text);
             return quantity;
-        }
-
-        public List<int> GetQuantityList()
-        {
-            return quantityList;
         }
     }
 }

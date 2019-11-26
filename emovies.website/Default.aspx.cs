@@ -107,7 +107,7 @@ namespace emovies.website
 
             if (Page.IsValid)
             {
-                quantityList = new QuantityReader(returnedMovieTable).GetQuantityList();
+                quantityList = new QuantityExtractor(returnedMovieTable).ExtractQuantityList();
                 SaveOrderToSession();
                 Response.Redirect("order.aspx");
             }
@@ -123,7 +123,7 @@ namespace emovies.website
         {
             try
             {
-                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                List<int> quantityListTest = new QuantityExtractor(returnedMovieTable).ExtractQuantityList();
                 args.IsValid = true;
             }
             catch
@@ -137,7 +137,7 @@ namespace emovies.website
         {
             try
             {
-                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                List<int> quantityListTest = new QuantityExtractor(returnedMovieTable).ExtractQuantityList();
                 try
                 {
                     bool quantityListAllZeros = quantityListTest.ContainsAllZeros();
@@ -157,7 +157,7 @@ namespace emovies.website
         {
             try
             {
-                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                List<int> quantityListTest = new QuantityExtractor(returnedMovieTable).ExtractQuantityList();
                 try
                 {
                     bool quantityListContainsNegatives = quantityListTest.ContainsNegativeValues();
@@ -178,7 +178,7 @@ namespace emovies.website
         {
             try
             {
-                List<int> quantityListTest = new QuantityReader(returnedMovieTable).GetQuantityList();
+                List<int> quantityListTest = new QuantityExtractor(returnedMovieTable).ExtractQuantityList();
                 try
                 {
                     bool quantityListOutOfRange = quantityListTest.IntegersOutOfRange(254);
