@@ -42,9 +42,9 @@ namespace emovies.website.Data
                     orderWriter.AddedCustomerID = customerWriter.GetLastAddedEntryID();
                     orderWriter.Write();
 
-                    foreach(OrderLine movieOrder in stagedData.MovieOrders)
+                    foreach(OrderLine orderLine in stagedData.OrderLines)
                     {
-                        orderLineWriter.OrderLine = movieOrder;
+                        orderLineWriter.OrderLine = orderLine;
                         orderLineWriter.AddedOrderID = orderWriter.GetLastAddedEntryID();
                         orderLineWriter.Write();
                     }

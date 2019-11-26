@@ -158,26 +158,22 @@
     <Compile Include="Controls\UserTextInputControl.ascx.designer.cs">
       <DependentUpon>UserTextInputControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Data\OrderLineWriter.cs" />
-    <Compile Include="Data\OrderWriter.cs" />
-    <Compile Include="Data\TableWriter.cs" />
-    <Compile Include="Data\CustomerWriter.cs" />
-    <Compile Include="Data\DataStager.cs" />
-    <Compile Include="Data\DBReader.cs" />
-    <Compile Include="Data\DBWriter.cs" />
-    <Compile Include="Data\DataStagedForDBWrite.cs" />
-    <Compile Include="Data\CustomerMapper.cs" />
-    <Compile Include="Data\CustomerOrderMapper.cs" />
-    <Compile Include="Data\DisplayCustomer.cs" />
-    <Compile Include="Data\DisplayCustomerMapper.cs" />
-    <Compile Include="Data\DisplayOrderLineMapper.cs" />
-    <Compile Include="Data\ListOfOrderLineMapper.cs" />
-    <Compile Include="Data\ListOfOrderLineGenerator.cs" />
-    <Compile Include="Data\CustomerOrder.cs" />
-    <Compile Include="Data\ListOfDisplayOrderLineMapper.cs" />
-    <Compile Include="Data\DisplayOrderLine.cs" />
-    <Compile Include="Data\Customer.cs" />
-    <Compile Include="Data\Movie.cs" />
+    <Compile Include="Data\ListExtensions\ListOfIntExtensions.cs" />
+    <Compile Include="Data\ListExtensions\ListOfOrderLineExtensions.cs" />
+    <Compile Include="Data\DBWriting\OrderLineWriter.cs" />
+    <Compile Include="Data\DBWriting\OrderWriter.cs" />
+    <Compile Include="Data\DBWriting\TableWriter.cs" />
+    <Compile Include="Data\DBWriting\CustomerWriter.cs" />
+    <Compile Include="Data\DBWriting\SessionDataStager.cs" />
+    <Compile Include="Data\DBReading\DBReader.cs" />
+    <Compile Include="Data\DBWriting\DBWriter.cs" />
+    <Compile Include="Data\DBWriting\DataStagedForDBWrite.cs" />
+    <Compile Include="Data\DisplayLayer\DisplayCustomer.cs" />
+    <Compile Include="Data\Mappers\DisplayCustomerMapper.cs" />
+    <Compile Include="Data\SelectionReading\ListOfOrderLineGenerator.cs" />
+    <Compile Include="Data\FundamentalDataStructures\CustomerOrder.cs" />
+    <Compile Include="Data\FundamentalDataStructures\Customer.cs" />
+    <Compile Include="Data\FundamentalDataStructures\Movie.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="confirmation.aspx.cs">
       <DependentUpon>confirmation.aspx</DependentUpon>
@@ -186,10 +182,9 @@
     <Compile Include="confirmation.aspx.designer.cs">
       <DependentUpon>confirmation.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Data\MovieRepository.cs" />
-    <Compile Include="Data\OrderLine.cs" />
-    <Compile Include="Data\QuantityReader.cs" />
-    <Compile Include="Data\TotalMapper.cs" />
+    <Compile Include="Data\DBReading\MovieRepository.cs" />
+    <Compile Include="Data\FundamentalDataStructures\OrderLine.cs" />
+    <Compile Include="Data\SelectionReading\QuantityReader.cs" />
     <Compile Include="order.aspx.cs">
       <DependentUpon>order.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,7 +221,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images2\" />
-    <Folder Include="Data\Mappers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

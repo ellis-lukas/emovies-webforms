@@ -1,9 +1,5 @@
 ﻿using emovies.website.Data;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,24 +15,24 @@ namespace emovies.website
             }
         }
 
-        public void SetUpOrderPageOnFirstLoad()
+        private void SetUpOrderPageOnFirstLoad()
         {
             SetUpOrderPageValidation();
         }
 
-        public void SetUpOrderPageValidation()
+        private void SetUpOrderPageValidation()
         {
             SetUpOrderPageInputValidation();
         }
 
-        public void SetUpOrderPageInputValidation()
+        private void SetUpOrderPageInputValidation()
         {
             SetUpNameValidation();
             SetUpEmailValidation();
             SetUpCardNumberValidation();
         }
 
-        public void SetUpNameValidation()
+        private void SetUpNameValidation()
         {
             Name.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
             Name.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
@@ -46,7 +42,7 @@ namespace emovies.website
             Name.EnableClientScript = true;
         }
 
-        public void SetUpEmailValidation()
+        private void SetUpEmailValidation()
         {
             Email.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
             Email.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
@@ -57,7 +53,7 @@ namespace emovies.website
             Email.EnableClientScript = true;
         }
 
-        public void SetUpCardNumberValidation()
+        private void SetUpCardNumberValidation()
         {
             CardNumber.RequiredFieldDisplay = ValidatorDisplay.Dynamic;
             CardNumber.RegularExpressionDisplay = ValidatorDisplay.Dynamic;
@@ -89,7 +85,7 @@ namespace emovies.website
 
         private void SubmitDataToDatabase()
         {
-            DataStagedForDBWrite dataStagedForDBWrite = new DataStager().StageData(Session);
+            DataStagedForDBWrite dataStagedForDBWrite = new SessionDataStager().StageData(Session);
             new DBWriter().WriteToDB(dataStagedForDBWrite);
         }
     }

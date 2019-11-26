@@ -18,12 +18,12 @@ namespace emovies.website.Data
             CurrentMoviesInRenderedOrder = currentMoviesInRenderedOrder;
         }
 
-        public List<OrderLine> GenerateMovieOrders()
+        public List<OrderLine> GenerateOrderLines()
         {
-            return ExtractNonZeroOrders(LinkDataToCreateListTypeMovieOrder());
+            return ExtractNonZeroOrders(LinkDataToCreateListTypeOrderLine());
         }
 
-        public List<OrderLine> LinkDataToCreateListTypeMovieOrder()
+        private List<OrderLine> LinkDataToCreateListTypeOrderLine()
         {
             List<OrderLine> MoviesOrdered = new List<OrderLine>();
             for (int i = 0; i < CurrentMoviesInRenderedOrder.Count; i++)
@@ -31,24 +31,26 @@ namespace emovies.website.Data
                 MoviesOrdered.Add(new OrderLine
                 {
                     MovieId = CurrentMoviesInRenderedOrder[i].Id,
+                    MovieName = CurrentMoviesInRenderedOrder[i].Name,
                     Price = CurrentMoviesInRenderedOrder[i].Price,
-                    Quantity = QuantityList[i]
+                    Quantity = QuantityList[i],
+                    Total = QuantityList[i] * CurrentMoviesInRenderedOrder[i].Price
                 });
             }
             return MoviesOrdered;
         }
 
-        private List<OrderLine> ExtractNonZeroOrders (List<OrderLine> movieOrdersZeroQuantInc)
+        private List<OrderLine> ExtractNonZeroOrders (List<OrderLine> orderLinesZeroQuantInc)
         {
-            List<OrderLine> nonZeroMovieOrders = new List<OrderLine>();
-            foreach (OrderLine movieOrder in movieOrdersZeroQuantInc)
+            List<OrderLine> nonZeroOrderLines = new List<OrderLine>();
+            foreach (OrderLine orderLine in orderLinesZeroQuantInc)
             {
-                if (movieOrder.Quantity > 0)
+                if (orderLine.Quantity > 0)
                 {
-                    nonZeroMovieOrders.Add(movieOrder);
+                    nonZeroOrderLines.Add(orderLine);
                 }
             }
-            return nonZeroMovieOrders;
+            return nonZeroOrderLines;
         }
     }
 }

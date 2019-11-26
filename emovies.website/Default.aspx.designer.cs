@@ -24,22 +24,22 @@ namespace emovies.website
         protected global::System.Web.UI.WebControls.Repeater BrowsePageRepeater;
 
         /// <summary>
-        /// NonZeroValidator control.
+        /// NotZerosValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator NonZeroValidator;
+        protected global::System.Web.UI.WebControls.CustomValidator NotZerosValidator;
 
         /// <summary>
-        /// NonNegativeValidator control.
+        /// NoNegativesValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator NonNegativeValidator;
+        protected global::System.Web.UI.WebControls.CustomValidator NoNegativesValidator;
 
         /// <summary>
         /// RangeValidator control.
@@ -49,6 +49,15 @@ namespace emovies.website
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator RangeValidator;
+
+        /// <summary>
+        /// FormatValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator FormatValidator;
 
         /// <summary>
         /// OrderNowButton control.

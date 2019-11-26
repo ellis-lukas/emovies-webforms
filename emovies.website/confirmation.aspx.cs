@@ -12,18 +12,10 @@ namespace emovies.website
 {
     public partial class Confirmation : Page
     {
-        private List<OrderLine> Orders;
-        protected List<DisplayOrderLine> DisplayOrders;
+        private List<OrderLine> OrderLines;
         private Customer CustomerInfo;
         private DisplayCustomer DisplayCustomerInfo;
-        private readonly MovieRepository movieRepository = MovieRepository.GetInstance();
         private decimal Total;
-
-        protected List<Movie> CurrentMovies
-        {
-            get
-            { return movieRepository.GetMovies(); }
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,58 +32,57 @@ namespace emovies.website
             PopulatePageWithOrderData();
         }
 
-        private static void SetPageCultureToBritish()
+        private void SetPageCultureToBritish()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
         }
 
-        public void SetPageMemberVariables()
+        private void SetPageMemberVariables()
         {
             SetPageMemberBusinessVariables();
             SetPageMemberDisplayVariables();
         }
 
-        public void SetPageMemberBusinessVariables()
+        private void SetPageMemberBusinessVariables()
         {
             CustomerInfo = (Customer)Session["CustomerInfo"];
-            Orders = (List<OrderLine>)Session["MoviesOrdered"];
+            OrderLines = (List<OrderLine>)Session["MoviesOrdered"];
         }
 
-        public void SetPageMemberDisplayVariables()
+        private void SetPageMemberDisplayVariables()
         {
-            DisplayOrders = new ListOfDisplayOrderLineMapper().MapFromListOfOrderLine(Orders);
             DisplayCustomerInfo = new DisplayCustomerMapper().MapFromCustomer(CustomerInfo);
-            Total = new TotalMapper().MapTotal(DisplayOrders);
+            Total = OrderLines.Total();
         }
 
-        public void PopulatePageWithOrderData()
+        private void PopulatePageWithOrderData()
         {
-            LoadCustomerInformationIntoPage();
+            LoadCustomerInformationIntoPage(DisplayCustomerInfo);
             LoadOrderTableIntoPage();
         }
 
-        public void LoadCustomerInformationIntoPage()
+        private void LoadCustomerInformationIntoPage(DisplayCustomer displayCustomer)
         {
-            CustomerName.Text = DisplayCustomerInfo.Name;
-            CustomerEmail.Text = DisplayCustomerInfo.Email;
-            CustomerCardNumber.Text = DisplayCustomerInfo.ProtectedCardNumber;
-            CustomerCardType.Text = DisplayCustomerInfo.CardType;
-            CustomerFuturePromotions.Text = (CustomerInfo.FuturePromotions == true) ? "Yes" : "No";
+            Name.Text = displayCustomer.Name;
+            Email.Text = displayCustomer.Email;
+            CardNumber.Text = displayCustomer.ProtectedCardNumber;
+            CardType.Text = displayCustomer.CardType;
+            FuturePromotions.Text = (displayCustomer.FuturePromotions == true) ? "Yes" : "No";
         }
 
-        public void LoadOrderTableIntoPage()
+        private void LoadOrderTableIntoPage()
         {
             LoadDisplayOrdersIntoOrderTable();
             LoadTotalIntoOrderTable();
         }
 
-        public void LoadDisplayOrdersIntoOrderTable()
+        private void LoadDisplayOrdersIntoOrderTable()
         {
-            RepeaterConfirmation.DataSource = DisplayOrders;
+            RepeaterConfirmation.DataSource = OrderLines;
             RepeaterConfirmation.DataBind();
         }
 
-        public void LoadTotalIntoOrderTable()
+        private void LoadTotalIntoOrderTable()
         {
             TotalValue.Text = string.Format("{0:c}", Total);
         }

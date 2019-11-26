@@ -51,7 +51,7 @@ namespace emovies.website.Data
 
         protected abstract void AddCommandParameters(SqlCommand command);
 
-        protected void ExecuteCommand(SqlCommand command)
+        private void ExecuteCommand(SqlCommand command)
         {
             using (command)
             {

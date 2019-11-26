@@ -15,22 +15,23 @@
                 <ItemTemplate>
                     <div class="table-row">
                         <div class="table-row__cell table-row__cell--movie table-row__cell--blue"><%# Eval("Name") %></div>
-                        <asp:TextBox ID="quantityCell" CssClass="table-row__cell table-row__cell--quantity table-row__cell--white" type="number" value="0" min="0" max="254" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="quantityCell" CssClass="table-row__cell table-row__cell--quantity table-row__cell--white" type="number" value="0" runat="server"></asp:TextBox>
                         <div class="table-row__cell table-row__cell--price table-row__cell--blue"><%# Eval("Price", "{0:c}") %></div>
                         <input type="hidden" class="table-row__price-currencyless" value="<%# Eval("Price") %>" />
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
-            <asp:CustomValidator ID="NonZeroValidator" ClientValidationFunction="ValidateQuantityInputsNonZero" runat="server"/>
-            <asp:CustomValidator ID="NonNegativeValidator" ClientValidationFunction="ValidateQuantityInputsNonNegative" runat="server"/>
-            <asp:CustomValidator ID="RangeValidator" ClientValidationFunction="ValidateQuantityInputsInRange" runat="server" />
+            <asp:CustomValidator ID="NotZerosValidator" ClientValidationFunction="ClientValidateNotZeros" OnServerValidate="ServerValidateNotZeros" runat="server"/>
+            <asp:CustomValidator ID="NoNegativesValidator" ClientValidationFunction="ClientValidateNoNegatives" OnServerValidate="ServerValidateNoNegatives" runat="server"/>
+            <asp:CustomValidator ID="RangeValidator" ClientValidationFunction="ClientValidateInRange" OnServerValidate="ServerValidateInRange" runat="server" />
+            <asp:CustomValidator ID="FormatValidator" OnServerValidate="ServerValidateFormat" runat="server" />
             <div class="total total--table">
                 <div class="total__cell total__cell--label total__cell--label-table">Total</div>
                 <div class="total__cell total__cell--value total__cell--value-table"></div>
             </div>
         </div>
         <div class="update">
-            <asp:Button CausesValidation="false" CssClass="update__button" Text="Update" runat="server" />
+            <asp:Button CausesValidation="false" Text="Update" OnClientClick="return false;" CssClass="update__button" runat="server"/>
         </div>
     </div>
     <div class="notice">Tickets are only valid for use on the day of purchase</div>
